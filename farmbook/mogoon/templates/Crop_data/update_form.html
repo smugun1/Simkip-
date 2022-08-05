@@ -1,0 +1,19 @@
+
+{% block content %}
+<div class="border p-3">
+    <div class="card-body">
+        <h4>Add Task</h4>
+        <hr>
+        <div class="alert alert-primary">
+
+            <p>Add record here!</p>
+        </div>
+        <form action="home" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <a class="btn btn-info bg-warning btn-block" href="{% url 'mogoon-table' %}">Return</a>
+            <input class="btn btn-info bg-warning" type="submit" value="Add">
+        </form>
+    </div>
+</div>
+{% endblock %}

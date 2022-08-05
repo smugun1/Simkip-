@@ -1,0 +1,61 @@
+{% extends 'mogoon/base.html' %}
+
+    {% include 'Crop_data/update.html' %}
+    {% include 'Crop_data/update-form.html' %}
+    {% include 'Crop_data/delete.html' %}
+
+    {% load static %}
+
+
+<title>{% block title %} {% endblock %}</title>
+
+<link rel='stylesheet' href="{% static 'style.css' %}" type='text/css'>
+
+{% block body %}
+<div class="container my-3">
+    <h2 class="text-center bg-dark text-warning">Crop Table</h2>
+        <div class="border p-3">
+        <input class="btn btn-primary bg-info btn-block-lg" href="{[ url 'home' }}" type="submit" value="Add">
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{ form }}
+        </form>
+        <hr>
+        <table class="table align-middle text-warning bg-dark table-hover">
+            <tr>
+                <th>plucking_date</th>
+                <th>crop_today</th>
+                <th>crop_todate</th>
+                <th>plucker_numbers</th>
+                <th>plucking_average</th>
+                <th>total_crop</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+            {% for data in crop_data %}
+            <tr>
+                <td>{{data.plucking_date}}</td>
+                <td>{{data.crop_today}}</td>
+                <td>{{data.crop_todate}}</td>
+                <td>{{data.plucker_numbers}}</td>
+                <td>{{data.plucking_average}}</td>
+                <td>{{data.total_crop}}</td>
+                <td><a class="btn btn-info btn-block bg-primary btn btn-info" href="{% url 'Crop_data-update' data.id %}">Edit</a></td>
+                <td><a class="btn btn-info btn-block bg-danger btn btn-info" href="{% url 'Crop_data-delete' data.id %}">Delete</a></td>
+            </tr>
+
+            {% endfor %}
+            <tr>
+                <td>#</td>
+                <td>#</td>
+                <td>#</td>
+                <td>#</td>
+                <td>#</td>
+                <td>#</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+{% endblock %}

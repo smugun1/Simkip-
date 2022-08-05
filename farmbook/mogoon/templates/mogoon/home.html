@@ -1,0 +1,46 @@
+{% extends 'mogoon/base.html' %}
+
+{% load static %}
+
+{% block title %} Home {% endblock %}
+ {% include 'Crop_data/update-form.html' %}
+{% block body %}
+<h1>This is farm notes home page</h1><br>
+
+<p><em> This is the reports description </em></p>
+
+<nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8'
+ height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);"
+     aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'mogoon-table' %}"><h3>The {{name}}</h3></a></li>
+        <li class="breadcrumb-item active" aria-current="page"><br><br></li>
+
+    </ol>
+</nav>
+<h3>...Farm Details...</h3>
+<hr width="99%" color="#ff0000" size="6">
+{% if success %}
+<div class="alert alert-primary alert dismissible fade show" role="alert">
+    <strong>simple success alert—check it out!</strong> form submitted :
+    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+{% endif %}
+<div class="container my-3 px=3 mx=3">
+    <h2 class="text-center bg-secondary text-warning text-bold">Welcome to Mogoon - Add a task</h2>
+    <div class="container my-3">
+    <div class="card card-body bg-secondary">
+        <form action="{{ url 'home' }}" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+        </form>
+        <button type="submit" class="btn btn-primary btn-lg" typeof="hover">Submit</button>
+    </div>
+    </div>
+</div>
+
+
+{% endblock %}

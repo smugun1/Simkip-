@@ -1,0 +1,68 @@
+{% extends 'mogoon/base.html' %}
+
+{% block title %} Image {% endblock %}
+
+{% block body %}
+<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" aria-label="Slide 4"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="4" aria-label="Slide 5"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="5" aria-label="Slide 6"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      {% load static %}<img src="{% static '/images/IMG20220507142149.jpg' %}" class="d-block w-100"  alt="...">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>< style="color:magenta;font-size:20px;"> Purple Tea at Moogon farm</h5>
+        <p>< style="color:lime;font-size:20px;"> First planting of Purple tea at Mogoon farm revealing its colour tone.</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      {% load static %}<img src="{% static '/images/IMG20220507142154.jpg' %}" class="d-block w-100"  alt="...">
+      <div class="carousel-caption d-none d-md-block">
+        <h5> style="color:magenta;font-size:20px;" Mogoon farm</h5>
+        <p><p style="color:lime;font-size:20px;"> The part of the ten percent Forest cover on the farm.</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      {% load static %}<img src="{% static '/images/IMG20220507142200.jpg' %}" class="d-block w-100"  alt="...">
+      <div class="carousel-caption d-none d-md-block">
+        <h5> style="color:magenta;font-size:20px;" Mogoon farm forest</h5>
+        <p><p style="color:lime;font-size:20px;"> Block six next to the forest.</p>
+      </div>
+    </div>
+      <div class="carousel-item">
+      {% load static %}<img src="{% static '/images/IMG20220427114142.jpg' %}" class="d-block w-100 h-auto"  alt="...">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>< style="color:magenta;font-size:20px;">Clouds </h5>
+        <p><p style="color:lime;font-size:20px;"> above Above Nandi Tea sky. This was taken at noon to capture the beautiful sky.</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      {% load static %}<img src="{% static '/images/IMG20220507142346.jpg' %}" class="d-block w-100 h-auto"  alt="...">
+      <div class="carousel-caption d-none d-md-block">
+        <h5> style="color:magenta;font-size:20px;">Block 9</h5>
+        <p><p style="color:lime;font-size:20px;"> Frost bite in the lower section of field six.</p>
+      </div>
+    </div>
+ <div class="carousel-item">
+      {% load static %}<img src="{% static '/images/IMG20220507142521.jpg/' %}" class="d-block w-100 h-auto"  alt="...">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>< style="color:magenta;font-size:20px;">Cross-section of field 7</h5>
+        <p><p style="color:lime;font-size:20px;"> View of weeds on the plucking path.</p>
+      </div>
+    </div>
+     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+  </div>
+{% endblock %}

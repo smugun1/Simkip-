@@ -1,0 +1,58 @@
+{% extends 'mogoon/base.html' %}
+
+    {% include 'Crop_data/update.html' %}
+    {% include 'Crop_data/delete.html' %}
+    {% include 'Crop_data/update-form.html' %}
+
+{% load static %}
+<title>{% block title %} {% endblock %}</title>
+<link rel='stylesheet' href="{% static 'style.css' %}" type='text/css'>
+{% load static %}
+{% block body %}
+<div class="container my-3">
+    <h2 class="text-center bg-dark text-warning">Crop Table</h2>
+    <div class="border p-3">
+        <table class="table align-middle text-warning bg-dark table-hover">
+            <tr>
+                <th>milking_done</th>
+                <th>milk_today</th>
+                <th>milk_todate</th>
+                <th>cows_milked</th>
+                <th>cow_numbers</th>
+                <th>milking_average</th>
+                <th>total_milk</th>
+                <th>calf_down</th>
+                <th>calf_numbers</th>
+                <th>vet_cost</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+
+            {% for data in crop_data %}
+            <tr>
+                <td>{{data.plucking_date}}</td>
+                <td>{{data.crop_today}}</td>
+                <td>{{data.crop_todate}}</td>
+                <td>{{data.plucker_numbers}}</td>
+                <td>{{data.plucking_average}}</td>
+                <td>{{data.total_crop}}</td>
+                <td><a class="btn btn-info btn-block bg-success btn btn-info" href="{% url 'Crop_data-update' data.id %}">Edit</a></td>
+                <td><a class="btn btn-info btn-block bg-danger btn btn-info" href="{% url 'Crop_data-delete' data.id %}">Delete</a></td>
+            </tr>
+
+            {% endfor %}
+            <tr>
+                <td>#</td>
+                <td>#</td>
+                <td>#</td>
+                <td>#</td>
+                <td>#</td>
+                <td>#</td>
+            </tr>
+            <input class="btn btn-primary bg-secondary btn-block-lg" href="" type="submit" value="Add">
+        </table>
+    </div>
+</div>
+
+
+{% endblock %}
