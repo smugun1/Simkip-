@@ -15,10 +15,10 @@ class Crop(models.Model):
     plucking_date = models.DateTimeField(auto_now_add=False, blank=False)
     crop_data = models.CharField(max_length=50, choices=CROP, default=False)
     crop_today = models.IntegerField()
-    crop_todate = models.IntegerField()
+    crop_todate = models.IntegerField(null=True, blank=True)
     plucker_numbers = models.IntegerField()
-    plucking_average = models.IntegerField()
-    total_crop = models.IntegerField()
+    plucking_average = models.IntegerField(null=True, blank=True)
+    total_crop = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
         return str(self.crop_data)

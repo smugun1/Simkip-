@@ -6,7 +6,7 @@
     <div class="alert alert-danger">
         <p>Are you sure you want to delete {{ item }} figure ?</p>
     </div>
-    <form action="{% url 'Crop_data-delete' item.id %}" method="POST">
+    <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
         <button class="btn btn-warning" typeof="hover"><a href="{% url 'mogoon-table' %}">Cancel</a></button>

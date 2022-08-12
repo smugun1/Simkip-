@@ -8,11 +8,11 @@
             <p>Update record here!</p>
         </div>
 
-        <form action="" method="POST">
+        <form method="POST">
             {% csrf_token %}
             {{ form.as_p }}
-            <a class="btn btn-warning bg-warning btn-info block-lg" href="{% url 'mogoon-table' %}">Return</a>
             <input class="btn btn-info bg-warning" type="submit" value="Edit">
+            <a class="btn btn-warning bg-warning btn-info block-lg" href="{% url 'mogoon-table' %}">Return</a>
         </form>
     </div>
 </div>

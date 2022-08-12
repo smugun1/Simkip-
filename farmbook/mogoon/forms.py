@@ -16,3 +16,10 @@ class UpdateTaskForm(forms.ModelForm):
     class Meta:
         model = Crop
         fields = '__all__'
+
+
+class UpdateForm(forms.ModelForm):
+
+    class Meta:
+        model = Crop
+        fields = '__all__'
