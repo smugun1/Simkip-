@@ -75,7 +75,7 @@ def update(request, pk):
         form = UpdateTaskForm(request.POST, instance=data)
         if form.is_valid():
             form.save()
-            return redirect('mogoon/table.html')
+            return redirect('/table')
 
     else:
         form = UpdateTaskForm(instance=data)
@@ -101,22 +101,6 @@ def delete(request, pk):
 
 
 @never_cache
-def update_form(request, pk):
-    if request.method == 'POST':
-        form = TaskForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('mogoon/table.html')
-
-    else:
-        form = TaskForm()
-
-    context = {
-        'form': form, 'TaskForm': TaskForm,
-    }
-    return render(request, 'Crop_data/update_form.html', context)
-
-
 def mogoonCreate(request):
     if request.method == "POST":
         # Handle the form here

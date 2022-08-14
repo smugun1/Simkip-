@@ -9,5 +9,5 @@ urlpatterns = [
     path('create/', views.mogoonCreate, name='mogoon-create'),
     path('update/<int:pk>/', views.update, name='Crop_data-update'),
     path('delete/<int:pk>/', views.delete, name='Crop_data-delete'),
-    path('update_form/<int:pk>/', views.update_form, name='Crop_data-update_form'),
+
 ]
