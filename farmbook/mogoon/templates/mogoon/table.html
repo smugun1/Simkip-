@@ -30,7 +30,6 @@
                 <th>Crop Todate</th>
                 <th>Plucker Numbers</th>
                 <th>Plucking Average</th>
-                <th>Total Crop</th>
                 <th>Update</th>
                 <th>Delete</th>
             </tr>
@@ -39,24 +38,19 @@
                 <td>{{data.plucking_date}}</td>
                 <td>{{data.crop_data}}</td>
                 <td>{{ data.crop_today}}</td>
-                <td>{{ data.crop_today|add:data.crop_todate }}</td>
+                <td>#</td>
                 <td>{{data.plucker_numbers}}</td>
                 <td>{% widthratio data.crop_today data.plucker_numbers 1 %}</td>
-                <td>{% widthratio data.plucker_numbers 1 data.Plucking_average %}</td>
                 <td><a class="btn btn-info btn-block bg-primary btn btn-info" href="{% url 'Crop_data-update' data.id %}">Edit</a></td>
                 <td><a class="btn btn-info btn-block bg-danger btn btn-info" href="{% url 'Crop_data-delete' data.id %}">Delete</a></td>
             </tr>
             {% endfor %}
-            <td>Totals</td>
-            <td>=====</td>
+            <td>Totals/Ave</td>
+            <td>None</td>
             <td>{{c_todate.all_sum}}</td>
-            <td>{{c_todate.all_sum}}</td>
-            <td></td>
-            <td>{% widthratio data.crop_today data.plucker_numbers 1 %}</td>
-            <td>{{c_total.all_sum}}</td>
-
-
-
+            <td>#</td>
+            <td>{{ p_numbers.all_quantity }}</td>
+        <td>{% widthratio c_todate.all_sum p_numbers.all_quantity 1 %}</td>
         </table>
     </div>
 </div>

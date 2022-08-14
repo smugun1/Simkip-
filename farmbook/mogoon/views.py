@@ -30,7 +30,11 @@ def Image(request):
 @never_cache
 def Notes(request):
     crop_todate = Crop.objects.aggregate(all_sum=Sum('crop_today'))
-
+    crop_today = Crop.objects.count()
+    crop_todate = Crop.objects.aggregate(all_sum=Sum('crop_today'))
+    plucker_numbers = Crop.objects.aggregate(all_quantity=Sum('plucker_numbers'))
+    plucking_average = F(crop_today) / F(plucker_numbers)
+    total_crop = Crop.objects.aggregate(total_sum=Sum('crop_todate'))
     context = {
         "crop_todate": crop_todate,
         "name": {"Farm data Notes"},
@@ -46,8 +50,8 @@ def Table(request):
     crop_today = Crop.objects.count()
     crop_todate = Crop.objects.aggregate(all_sum=Sum('crop_today'))
     plucker_numbers = Crop.objects.aggregate(all_quantity=Sum('plucker_numbers'))
-    plucking_average = F(crop_today) / F(plucker_numbers["all_quantity"])
-    total_crop = Crop.objects.aggregate(all_sum=Sum('crop_todate'))
+    plucking_average = F(crop_today) / F(plucker_numbers)
+    total_crop = Crop.objects.aggregate(total_sum=Sum('crop_todate'))
 
     context = {
         "name": {"Crop Table"},
@@ -58,6 +62,7 @@ def Table(request):
         "p_numbers": plucker_numbers,
         "p_average": plucking_average,
         "t_crop": total_crop,
+
     }
     return render(request, 'mogoon/table.html', context)
 
@@ -115,15 +120,26 @@ def update_form(request, pk):
 def mogoonCreate(request):
     if request.method == "POST":
         # Handle the form here
+        form = TaskForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('mogoon/table.html')
+
+        else:
+            form = TaskForm()
+
+        context = {
+            'form': form, 'TaskForm': TaskForm,
+        }
         plucking_date = request.POST['plucking_date']
         crop_data = request.POST['crop_data']
         crop_today = request.POST['crop_today']
         crop_todate = request.POST['crop_todate']
         plucker_number = request.POST['plucker_number']
-        pluckin_avaerage = request.POST['plucking_average']
+        plucking_average = request.POST['plucking_average']
         total_crop = request.POST['total_crop']
 
         insert = Crop(plucking_date=plucking_date, crop_data=crop_data, crop_today=crop_today, crop_todate=crop_todate,
-                      plucker_number=plucker_number, pluckin_avaerage=pluckin_avaerage, total_crop=total_crop)
+                      plucker_numbers=plucker_number, plucking_average=plucking_average, total_crop=total_crop)
         insert.save()
         return redirect('mogoon-table')

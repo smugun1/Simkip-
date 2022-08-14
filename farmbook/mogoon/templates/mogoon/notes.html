@@ -5,13 +5,14 @@
 {% block title %}Notes Table{% endblock %}
 
 {% block body %}
-<h3>This is the {{name}}</h3>
+<h5>This is the {{name}}</h5>
 
 <div class="container fluid bg-info text-warning" style="width: 25rem;">
     <div class="card card bg-dark text-right" style="width: 23rem;">
-        <h2>Notes Update</h2>
-        <form action="" method="POST">
+        <h2 class="text-center text-warning">Notes Update</h2>
+        <form action="{% url 'mogoon-create' %}" method="POST">
             {% csrf_token %}
+            {{ form }}
 
             <label for="formGroupExampleInput" class="form-label"><strong>Plucking Date</strong></label>
             <input style="height:40px;width:300px" type="datetime-local" class="form-control"
@@ -43,15 +44,16 @@
                 <div class="col-sm col-sm">
                     <label for="formGroupExampleInput2" class="form-label"><strong>Plucking Average</strong></label>
                     <input style="height:40px;width:300px" type="text" class="form-control" id="formGroupExampleInput6"
-                           placeholder="plucking_average" name="plucking_average">
+                           placeholder="plucking_average" name="plucking_average" value="{% widthratio data.crop_today data.plucker_numbers 1 %}">
                 </div>
                 <div class="col-sm col-sm">
                     <label for="formGroupExampleInput2" class="form-label"><strong>Total Crop</strong></label>
                     <input style="height:40px;width:300px" type="text" class="form-control" id="formGroupExampleInput7"
-                           placeholder="total_crop" name="total_crop">
+                           placeholder="total_crop" name="total_crop" value="">
                 </div>
                 <div class="container my-3">
-                    <button type="submit" class="btn btn-primary" typeof="hover">Submit</button>
+                    <button class="btn btn-primary" type="submit" value="Update" name="update" typeof="hover">Submit</button>
+
                     <a class="btn btn-warning bg-success btn-info block-lg" href="{% url 'mogoon-table' %}">Return</a>
                 </div>
             </div>
