@@ -20,16 +20,7 @@ def Home(request):
 
 
 @never_cache
-def Image(request):
-    context = {
-        "name": {"Farm images"},
-    }
-    return render(request, 'mogoon/image.html', context)
-
-
-@never_cache
 def Notes(request):
-    crop_todate = Crop.objects.aggregate(all_sum=Sum('crop_today'))
     crop_today = Crop.objects.count()
     crop_todate = Crop.objects.aggregate(all_sum=Sum('crop_today'))
     plucker_numbers = Crop.objects.aggregate(all_quantity=Sum('plucker_numbers'))
@@ -75,7 +66,7 @@ def update(request, pk):
         form = UpdateTaskForm(request.POST, instance=data)
         if form.is_valid():
             form.save()
-            return redirect('/table')
+            return redirect('mogoon/table.html')
 
     else:
         form = UpdateTaskForm(instance=data)

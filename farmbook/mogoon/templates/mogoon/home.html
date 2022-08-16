@@ -3,36 +3,91 @@
 {% load static %}
 
 {% block title %} Home {% endblock %}
- {% include 'Crop_data/update-form.html' %}
+{% include 'Crop_data/update-form.html' %}
 {% block body %}
 
-<p><em> This is the reports description </em></p>
+<p><em> This is the reports log in page </em></p>
 
 <hr width="99%" color="#ff00ff" size="16">
-{% if success %}
-<div class="alert alert-primary alert dismissible fade show" role="alert">
-    <strong>simple success alert—check it out!</strong> form submitted :
-    <button type="button" class="close" data-dismiss="alert" aria-label="close">
-        <span aria-hidden="true">&times;</span>
-    </button>
+<div class="container fluid">
+    <form class="row g-3 needs-validation" novalidate>
+        <div class="col-md-4 position-relative">
+            <label for="validationTooltip01" class="form-label">First name</label>
+            <input type="text" class="form-control" id="validationTooltip01" value="type first name" required>
+            <div class="valid-tooltip">
+                Looks good!
+            </div>
+        </div>
+        <div class="col-md-4 position-relative">
+            <label for="validationTooltip02" class="form-label">Last name</label>
+            <input type="text" class="form-control" id="validationTooltip02" value="type last name" required>
+            <div class="valid-tooltip">
+                Looks good!
+            </div>
+        </div>
+        <div class="col-md-4 position-relative">
+            <label for="validationTooltipUsername" class="form-label">Username</label>
+            <div class="input-group has-validation">
+                <span class="input-group-text" id="validationTooltipUsernamePrepend">@</span>
+                <input type="text" class="form-control" id="validationTooltipUsername"
+                       aria-describedby="validationTooltipUsernamePrepend" required>
+                <div class="invalid-tooltip">
+                    Please choose a unique and valid username.
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
+                <label class="form-check-label" for="invalidCheck2">
+                    Agree to terms and conditions
+                </label>
+            </div>
+        </div>
+        <form class="was-validated">
+            <div class="mb-3">
+                <label for="validationTextarea" class="form-label">Daily report Comment</label>
+                <textarea class="form-control" id="validationTextarea" placeholder="Required example textarea"
+                          required></textarea>
+                <div class="invalid-feedback">
+                    Please enter a message in the textarea.
+                </div>
+            </div>
+
+            <div class="form-check mb-3">
+                <input type="checkbox" class="form-check-input" id="validationFormCheck1" required>
+                <label class="form-check-label" for="validationFormCheck1">Check this checkbox</label>
+                <div class="invalid-feedback">Example invalid feedback text</div>
+            </div>
+
+            <div class="form-check">
+                <input type="radio" class="form-check-input" id="validationFormCheck2" name="radio-stacked" required>
+                <label class="form-check-label" for="validationFormCheck2">Toggle this radio</label>
+            </div>
+            <div class="form-check mb-3">
+                <input type="radio" class="form-check-input" id="validationFormCheck3" name="radio-stacked" required>
+                <label class="form-check-label" for="validationFormCheck3">Or toggle this other radio</label>
+                <div class="invalid-feedback">More example invalid feedback text</div>
+            </div>
+
+            <div class="mb-3">
+                <select class="form-select" required aria-label="select example">
+                    <option value="">Open this select menu</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+                <div class="invalid-feedback">Example invalid select feedback</div>
+            </div>
+
+            <div class="mb-3">
+                <input type="file" class="form-control" aria-label="file example" required>
+                <div class="invalid-feedback">Example invalid form file feedback</div>
+            </div>
+            <div class="col-12">
+                <button class="btn btn-primary" type="submit">Submit form</button>
+            </div>
+         </form>
+    </form>
 </div>
-
-{% endif %}
-<div class="container card card-dark bg-light my-3 px=3 mx=3">
-    <h2 class="text-center bg-secondary text-warning text-bold">Mogoon - Daily Reports</h2>
-    <div class="container my-3">
-    <div class="card card-body text-dark text-bold bg-secondary">
-        <form method="POST">
-            {% csrf_token %}
-            {{ form.as_p }}
-        </form>
-
-        <a class="btn btn-warning bg-info btn-light block-sm" typeof="hover" href="{% url 'mogoon-table' %}">Return</a>
-
-        <input class="btn btn-danger bg-warning btn-sm" typeof="hover" type="submit" value="Add">
-    </div>
-    </div>
-</div>
-
-
 {% endblock %}

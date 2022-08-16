@@ -7,6 +7,16 @@
 {% block body %}
 <h5>This is the {{name}}</h5>
 
+
+{% if success %}
+<div class="alert alert-primary alert dismissible fade show" role="alert">
+    <strong>simple success alert—check it out!</strong> form submitted :
+    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+{% endif %}
 <div class="container fluid bg-info text-warning" style="width: 25rem;">
     <div class="card card bg-dark text-right" style="width: 23rem;">
         <h2 class="text-center text-warning">Notes Update</h2>
