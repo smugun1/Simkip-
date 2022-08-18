@@ -1,10 +1,12 @@
-from django.db.models import Sum, F
+import numpy as np
+from django.db.models import Sum, F, Window, Func
 from django.shortcuts import render, redirect
 from django.views.decorators.cache import never_cache
 
 from . import models
 from .forms import TaskForm, UpdateTaskForm
 from .models import *
+import logging
 
 
 # Create your views here.
@@ -39,7 +41,21 @@ def Table(request):
     data = Crop.objects.all()
     plucking_date = models.DateTimeField()
     crop_today = Crop.objects.count()
+    # next_row = Crop.objects.get(id__gt=Crop.objects.id)
+    # next_plucking_date = next_row.plucking_date
     crop_todate = Crop.objects.aggregate(all_sum=Sum('crop_today'))
+    print(data)
+
+    # crop_todate = Crop.objects.filter(
+    #     Crop_today=data.id,
+    #     date__range=(plucking_date, next_plucking_date)
+    # ).order_by('id').annotate(
+    #     cumbalance=Window(Sum('crop_today'), order_by=F('id').asc())
+    # )
+    # logging.basicConfig(level=logging.INFO)
+    # logger = logging.getLogger('mogoon')
+    # logger.info(data)
+    logging.warning(data)
     plucker_numbers = Crop.objects.aggregate(all_quantity=Sum('plucker_numbers'))
     plucking_average = F(crop_today) / F(plucker_numbers)
     total_crop = Crop.objects.aggregate(total_sum=Sum('crop_todate'))

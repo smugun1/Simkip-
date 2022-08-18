@@ -37,8 +37,8 @@
             <tr>
                 <td>{{data.plucking_date}}</td>
                 <td>{{data.crop_data}}</td>
-                <td>{{ data.crop_today}}</td>
-                <td>#</td>
+                <td>{{data.crop_today}}</td>
+                <td>{{data.crop_today|add:data.crop_today}}</td>
                 <td>{{data.plucker_numbers}}</td>
                 <td>{% widthratio data.crop_today data.plucker_numbers 1 %}</td>
                 <td><a class="btn btn-info btn-block bg-primary btn btn-info" href="{% url 'Crop_data-update' data.id %}">Edit</a></td>
@@ -48,7 +48,7 @@
             <td>Totals/Ave</td>
             <td>None</td>
             <td>{{c_todate.all_sum}}</td>
-            <td>#</td>
+            <td>{{c_todate.all_sum}}</td>
             <td>{{ p_numbers.all_quantity }}</td>
         <td>{% widthratio c_todate.all_sum p_numbers.all_quantity 1 %}</td>
         </table>
