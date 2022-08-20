@@ -5,13 +5,22 @@
     {% include 'Crop_data/update-form.html' %}
 
 {% load static %}
+
+
 <title>{% block title %} {% endblock %}</title>
+
 <link rel='stylesheet' href="{% static 'style.css' %}" type='text/css'>
-{% load static %}
+
 {% block body %}
-<div class="container my-3">
-    <h2 class="text-center bg-dark text-warning">Crop Table</h2>
-    <div class="border p-3">
+<div class="container-fluid text-right card bg-secondary card-dark mx-0 px-0 my-0 py-0">
+    <h2 class="text-center bg-dark text-warning">Milk Table</h2>
+       <div class="border p-3">
+        <a class="btn btn-warning bg-primary btn-info block-lg" href="{% url 'crop_table_update' %}">Add</a>
+        <form action="" method="POST">
+            {% csrf_token %}
+        </form>
+
+        <hr>
         <table class="table align-middle text-warning bg-dark table-hover">
             <tr>
                 <th>milking_done</th>
@@ -30,12 +39,16 @@
 
             {% for data in crop_data %}
             <tr>
-                <td>{{data.plucking_date}}</td>
-                <td>{{data.crop_today}}</td>
-                <td>{{data.crop_todate}}</td>
-                <td>{{data.plucker_numbers}}</td>
-                <td>{{data.plucking_average}}</td>
-                <td>{{data.total_crop}}</td>
+                <td>{{milking_done}}</td>
+                <td>{{milk_today}}</td>
+                <td>{{milk_todate}}</td>
+                <td>{{cows_milked}}</td>
+                <td>{{cow_numbers}}</td>
+                <td>{{milking_average}}</td>
+                <td>{{total_milk}}</td>
+                <td>{{calf_down}}</td>
+                <td>{{calf_numbers}}</td>
+                <td>{{vet_cost}}</td>
                 <td><a class="btn btn-info btn-block bg-success btn btn-info" href="{% url 'Crop_data-update' data.id %}">Edit</a></td>
                 <td><a class="btn btn-info btn-block bg-danger btn btn-info" href="{% url 'Crop_data-delete' data.id %}">Delete</a></td>
             </tr>
@@ -49,7 +62,7 @@
                 <td>#</td>
                 <td>#</td>
             </tr>
-            <input class="btn btn-primary bg-secondary btn-block-lg" href="" type="submit" value="Add">
+
         </table>
     </div>
 </div>

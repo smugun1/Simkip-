@@ -37,7 +37,7 @@ class Kandojobs(models.Model):
     weeding_cost = models.DecimalField(max_digits=8, decimal_places=2)
 
     def __str__(self):
-        return self.pruned_bushes
+        return str(self.pruned_bushes)
 
 
 class Fertilizer(models.Model):

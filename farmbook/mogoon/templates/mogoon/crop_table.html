@@ -12,10 +12,10 @@
 <link rel='stylesheet' href="{% static 'style.css' %}" type='text/css'>
 
 {% block body %}
-<div class="container text-right card bg-secondary card-dark mx-0 px-0 my-0 py-0">
+<div class="container-fluid text-right card bg-secondary card-dark mx-0 px-0 my-0 py-0">
     <h2 class="text-center bg-dark text-warning">Crop Table</h2>
         <div class="border p-3">
-        <a class="btn btn-warning bg-primary btn-info block-lg" href="{% url 'notes' %}">Add</a>
+        <a class="btn btn-warning bg-primary btn-info block-lg" href="{% url 'crop_table_update' %}">Add</a>
         <form action="" method="POST">
             {% csrf_token %}
        </form>
@@ -38,7 +38,7 @@
                 <td>{{data.plucking_date}}</td>
                 <td>{{data.crop_data}}</td>
                 <td>{{data.crop_today}}</td>
-                <td>{{data.crop_today|add:data.crop_today}}</td>
+                <td>{{data.crop_todate}}</td>
                 <td>{{data.plucker_numbers}}</td>
                 <td>{% widthratio data.crop_today data.plucker_numbers 1 %}</td>
                 <td><a class="btn btn-info btn-block bg-primary btn btn-info" href="{% url 'Crop_data-update' data.id %}">Edit</a></td>
@@ -46,13 +46,27 @@
             </tr>
             {% endfor %}
             <td>Totals/Ave</td>
-            <td>None</td>
+            <td></td>
             <td>{{c_todate.all_sum}}</td>
             <td>{{c_todate.all_sum}}</td>
             <td>{{ p_numbers.all_quantity }}</td>
         <td>{% widthratio c_todate.all_sum p_numbers.all_quantity 1 %}</td>
+            <br>
+            <br>
+            <tr>
+                <td>Total Green Tea</td>
+                <td></td>
+                <td></td>
+                <td>#{{ Greentea.crop_todate }}</td>
+            </tr>
+            <tr>
+                <td>Total Purple Tea</td>
+                <td></td>
+                <td></td>
+                <td>#{{ Purpletea.crop_todate }}</td>
+            </tr>
         </table>
-    </div>
-</div>
 
+</div>
+</div>
 {% endblock %}

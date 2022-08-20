@@ -2,7 +2,7 @@
 
 {% load static %}
 
-{% block title %}Notes Table{% endblock %}
+{% block title %}Crop Table Update{% endblock %}
 
 {% block body %}
 <h5>This is the {{name}}</h5>
@@ -19,7 +19,7 @@
 {% endif %}
 <div class="container fluid bg-info text-warning" style="width: 25rem;">
     <div class="card card bg-dark text-right" style="width: 23rem;">
-        <h2 class="text-center text-warning">Notes Update</h2>
+        <h2 class="text-center text-warning">Crop Table Update</h2>
         <form action="{% url 'mogoon-create' %}" method="POST">
             {% csrf_token %}
             {{ form }}
@@ -44,7 +44,7 @@
                 <div class="col-sm col-sm">
                     <label for="formGroupExampleInput2" class="form-label"><strong>Crop Todate</strong></label>
                     <input style="height:40px;width:300px" type="text" class="form-control" id="formGroupExampleInput4"
-                           placeholder="crop_todate" name="crop_todate" value="{{crop_todate.all_sum}}">
+                           placeholder="crop_todate" name="crop_todate" value="{{crop_todate.all_sum}}" readonly>
                 </div>
                 <div class="col-sm col-sm">
                     <label for="formGroupExampleInput2" class="form-label"><strong>Plucker Numbers</strong></label>
@@ -64,7 +64,7 @@
                 <div class="container my-3">
                     <button class="btn btn-primary" type="submit" value="Update" name="update" typeof="hover">Submit</button>
 
-                    <a class="btn btn-warning bg-success btn-info block-lg" href="{% url 'mogoon-table' %}">Return</a>
+                    <a class="btn btn-warning bg-success btn-info block-lg" href="{% url 'mogoon-crop_table' %}">Return</a>
                 </div>
             </div>
         </form>
