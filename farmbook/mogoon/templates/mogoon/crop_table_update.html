@@ -20,7 +20,7 @@
 <div class="container fluid bg-info text-warning" style="width: 25rem;">
     <div class="card card bg-dark text-right" style="width: 23rem;">
         <h2 class="text-center text-warning">Crop Table Update</h2>
-        <form action="{% url 'mogoon-create' %}" method="POST">
+        <form action="{% url 'mogoon-crop_create' %}" method="POST">
             {% csrf_token %}
             {{ form }}
 
@@ -63,7 +63,6 @@
                 </div>
                 <div class="container my-3">
                     <button class="btn btn-primary" type="submit" value="Update" name="update" typeof="hover">Submit</button>
-
                     <a class="btn btn-warning bg-success btn-info block-lg" href="{% url 'mogoon-crop_table' %}">Return</a>
                 </div>
             </div>

@@ -48,7 +48,7 @@ class Fertilizer(models.Model):
     fertilizer_cost = models.DecimalField(max_digits=8, decimal_places=2)
 
     def __str__(self):
-        return self.fertilizer
+        return str(self.fertilizer_amt)
 
 
 class Milk(models.Model):

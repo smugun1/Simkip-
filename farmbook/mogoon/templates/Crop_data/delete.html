@@ -9,7 +9,7 @@
     <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
-        <button class="btn btn-warning" typeof="hover"><a href="{% url 'mogoon-table' %}">Cancel</a></button>
+        <button class="btn btn-warning" typeof="hover"><a href="{% url 'mogoon-crop_table' %}">Cancel</a></button>
         <button class="btn btn-danger" typeof="hover" type="submit">Confirm</button>
 
     </form>
