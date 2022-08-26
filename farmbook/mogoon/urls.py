@@ -18,7 +18,7 @@ urlpatterns = [
     path('kandojobs_create/', views.mogoonKandojobsCreate, name='mogoon-kandojobs_create'),
 
     path('fertilizer_table/', views.FertilizerTable, name='mogoon-fertilizer_table'),
-    path('fertilizer_table_update/', views.mogoonFertilizerTableCreate, name='mogoon-fertilizer_table_update'),
+    path('fertilizer_table_update/', views.mogoonFertilizerTableUpdate, name='mogoon-fertilizer_table_update'),
     path('fertilizer_create/', views.mogoonFertilizerCreate, name='mogoon-fertilizer_create'),
 
     path('milk_table/', views.MilkTable, name='mogoon-milk_table'),

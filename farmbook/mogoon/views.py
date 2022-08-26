@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.db.models import Sum, F
 from django.shortcuts import render, redirect
 from django.views.decorators.cache import never_cache
@@ -117,44 +119,70 @@ def mogoonCropCreate(request):
         insert = Crop(plucking_date=plucking_date, crop_data=crop_data, crop_today=crop_today, crop_todate=crop_todate,
                       plucker_numbers=plucker_number, plucking_average=plucking_average, total_crop=total_crop)
         insert.save()
-        return redirect('/crop_table')
+
+    return redirect('/crop_table')
 
 
 @never_cache
 def KandojobsTable(request):
-    job = Kandojobs.objects.all()
+    data = Kandojobs.objects.all()
+    pruning_done = models.DateTimeField()
     pruned_block_No = models.IntegerField()
     pruned_bushes = Kandojobs.objects.count()
-    pruning_done = models.DateTimeField()
     pruning_cost = F(pruned_bushes) * F(input('pruning_rate'))
     weeding_done = models.DateTimeField()
     chemical_name = models.CharField()
     block_No = models.IntegerField()
-    weeding_chem = models.CharField()
+    cost_per_lit = input()
+    weeding_chem_amt = models.FloatField()
     weeding_labour = F(input('labour_number') * F(input('labour_cost')))
-    weeding_cost = models.FloatField()
+    weeding_cost = F(weeding_chem_amt) * (input(cost_per_lit))
 
     context = {
         "name": {"Kandojobs Table"},
-        "Kandojobs": job,
+        "Kandojobs": data,
+        "pruning_done": pruning_done,
         "pruned_block_No": pruned_block_No,
         "pruned_bushes": pruned_bushes,
-        "pruning_done": pruning_done,
         "Pruning_cost": pruning_cost,
         "weeding_done": weeding_done,
         "chemical_name": chemical_name,
         "block_No": block_No,
-        "weeding_chem": weeding_chem,
+        "cost_per_lit": cost_per_lit,
+        "weeding_chem_amt": weeding_chem_amt,
         "weeding_labour": weeding_labour,
         "weeding_cost": weeding_cost,
     }
     return render(request, 'mogoon/kandojobs_table.html', context)
 
 
+@never_cache
 def KandojobsTableUpdate(request):
-    pass
+    pruned_bushes = Kandojobs.objects.count()
+
+    pruning_cost = F(pruned_bushes) * F(input('pruning_rate'))
+    block_No = models.IntegerField()
+    cost_per_lit = input()
+    weeding_chem_amt = models.FloatField()
+    weeding_labour = F(input('labour_number') * F(input('labour_cost')))
+
+    weeding_cost = F(weeding_chem_amt) * (input(cost_per_lit))
+    context = {
+        "pruned_bushes": pruned_bushes,
+        "pruning_cost": pruning_cost,
+        "block_No": block_No,
+        "cost_per_lit": cost_per_lit,
+        "weeding_labour": weeding_labour,
+        "weeding_chem_amt": weeding_chem_amt,
+        "weeding_cost": weeding_cost,
+
+        "name": {"Farm data Notes"},
+
+    }
+    return render(request, 'mogoon/kandojobs_table_update.html', context)
 
 
+@never_cache
 def mogoonKandojobsCreate(request):
     if request.method == "POST":
         pruned_block_No = request.POST['pruned_block_No']
@@ -164,6 +192,7 @@ def mogoonKandojobsCreate(request):
         weeding_done = request.POST['weeding_done']
         chemical_name = request.POST['chemical_name']
         block_No = request.POST['block_No']
+        cost_per_lit = request.POST['cost_per_lit']
         weeding_chem = request.POST['weeding_chem']
         weeding_labour = request.POST['weeding_labour']
         weeding_cost = request.POST['weeding_cost']
@@ -171,41 +200,44 @@ def mogoonKandojobsCreate(request):
         insert = Kandojobs(pruned_block_No=pruned_block_No, pruned_bushes=pruned_bushes, pruning_done=pruning_done,
                            pruning_cost=pruning_cost,
                            weeding_done=weeding_done, chemical_name=chemical_name, block_No=block_No,
-                           weeding_labour=weeding_chem, weeding_cost=weeding_labour)
+                           cost_per_lit=cost_per_lit, weeding_chem=weeding_chem, weeding_labour=weeding_labour,
+                           weeding_cost=weeding_cost)
         insert.save()
         return redirect('/kandojobs_table')
 
 
 @never_cache
 def MilkTable(request):
-    lit = Milk.objects.all()
+    data = Milk.objects.all()
     milking_done = models.DateTimeField()
     milk_today = Milk.objects.count()
     milk_todate = Milk.objects.aggregate(all_sum=Sum('milk_today'))
     cows_milked = Milk.objects.count()
-    cows_numbers = Milk.objects.aggregate(all_quantity=Sum('cows_numbers'))
-    milking_average = F(milk_today) / F(cows_numbers)
+    cow_numbers = Milk.objects.count()
+    milking_average = F(milk_today) / F(cow_numbers)
     total_milk = Milk.objects.aggregate(total_sum=Sum('milk_todate'))
     calf_down = models.DateTimeField()
-    calf_numbers = Milk.objects.aggregate(all_quantity=Sum('cows_numbers'))
+    calf_numbers = Milk.objects.count()
     vet_cost = models.FloatField()
 
     context = {
         "name": {"Milk Table"},
-        "milking_done": milking_done,
-        "milk_today": milk_today,
-        "milk_todate": milk_todate,
-        "cows_milked": cows_milked,
-        "cows_numbers": cows_numbers,
-        "milking_average": milking_average,
-        "total_milk": total_milk,
-        "calf_down": calf_down,
-        "calf_numbers": calf_numbers,
-        "vet_cost": vet_cost,
+        "milk": data,
+        "m_done": milking_done,
+        "m_today": milk_today,
+        "m_todate": milk_todate,
+        "c_milked": cows_milked,
+        "c_numbers": cow_numbers,
+        "m_average": milking_average,
+        "t_milk": total_milk,
+        "cf_down": calf_down,
+        "cf_numbers": calf_numbers,
+        "v_cost": vet_cost,
     }
     return render(request, 'mogoon/milk_table.html', context)
 
 
+@never_cache
 def MilkTableUpdate(request):
     # get the current milk_todate value
     milk_todate = Milk.objects.aggregate(all_sum=Sum('milk_today'))
@@ -243,7 +275,7 @@ def mogoonMilkCreate(request):
         milk_todate = int(request.POST['milk_todate']) + int(milk_today)
         # Initially request.POST['milk_today'] is a string, it has to be wrapped with an int for purpose of addition
         cows_milked = request.POST['cows_milked']
-        cows_numbers = request.POST['cows_numbers']
+        cow_numbers = request.POST['cow_numbers']
         milking_average = request.POST['milking_average']
         total_milk = request.POST['total_milk']
         calf_down = request.POST['calf_down']
@@ -252,7 +284,7 @@ def mogoonMilkCreate(request):
 
         insert = Milk(milking_done=milking_done, milk_today=milk_today, milk_todate=milk_todate,
                       cows_milked=cows_milked,
-                      cows_numbers=cows_numbers, milking_average=milking_average, total_milk=total_milk,
+                      cow_numbers=cow_numbers, milking_average=milking_average, total_milk=total_milk,
                       calf_down=calf_down, calf_numbers=calf_numbers, vet_cost=vet_cost)
         insert.save()
         return redirect('/milk_table')
@@ -261,17 +293,16 @@ def mogoonMilkCreate(request):
 @never_cache
 def FertilizerTable(request):
     data = Fertilizer.objects.all()
-    fertilizer = models.CharField()
-    fertilizer_amt = Fertilizer.objects.count()
     fertilizer_applied = models.DateTimeField()
+    fertilizer_amt = Fertilizer.objects.count()
     fertilizer_labour = Fertilizer.objects.aggregate(all_sum=Sum(input('labour')))
     fertilizer_cost = F(fertilizer_amt) * F(cost=5400) + F(input('labour') * 300)
 
     context = {
         "name": {"Fertilizer Table"},
         "fertilizer": data,
-        "fertilizer_amt": fertilizer_amt,
         "fertilizer_applied": fertilizer_applied,
+        "fertilizer_amt": fertilizer_amt,
         "fertilizer_labour": fertilizer_labour,
         "fertilizer_cost": fertilizer_cost,
 
@@ -279,12 +310,30 @@ def FertilizerTable(request):
     return render(request, 'mogoon/fertilizer_table.html', context)
 
 
-def mogoonFertilizerCreate():
-    return None
+@never_cache
+def mogoonFertilizerTableUpdate(request):
+    fertilizer_amt = Fertilizer.objects.count()
+    context = {
+        "fertilizer_amt": fertilizer_amt,
+        "name": {"Fertilizer Table"},
+
+    }
+    return render(request, 'mogoon/fertilizer_table_update.html', context)
 
 
-def mogoonFertilizerTableCreate():
-    return None
+@never_cache
+def mogoonFertilizerCreate(request):
+    if request.method == "POST":
+        fertilizer = request.POST['fertilizer']
+        fertilizer_applied = request.POST['fertilizer_applied']
+        fertilizer_amt = request.POST['fertilizer_amt']
+        fertilizer_labour = request.POST['fertilizer_labour']
+        fertilizer_cost = request.POST['fertilizer_cost']
+        insert = Fertilizer(fertilizer=fertilizer, fertilizer_applied=fertilizer_applied, fertilizer_amt=fertilizer_amt,
+                            fertilizer_labour=fertilizer_labour,
+                            fertilizer_cost=fertilizer_cost)
+        insert.save()
+        return redirect('/fertilizer_table')
 
 
 @never_cache

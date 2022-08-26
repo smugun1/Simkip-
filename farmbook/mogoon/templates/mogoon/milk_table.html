@@ -1,8 +1,8 @@
 {% extends 'mogoon/base.html' %}
 
-    {% include 'Crop_data/update.html' %}
+{% include 'Crop_data/update.html' %}
 
-    {% include 'Crop_data/delete.html' %}
+{% include 'Crop_data/delete.html' %}
 
 
 {% load static %}
@@ -15,7 +15,7 @@
 {% block body %}
 <div class="container-fluid text-right card bg-secondary card-dark mx-0 px-0 my-0 py-0">
     <h2 class="text-center bg-dark text-warning">Milk Table</h2>
-       <div class="border p-3">
+    <div class="border p-3">
         <a class="btn btn-warning bg-primary btn-info block-lg" href="{% url 'mogoon-milk_table_update'%}">Add</a>
         <form action="" method="POST">
             {% csrf_token %}
@@ -30,30 +30,56 @@
                 <th>Milk Today</th>
                 <th>Milk Todate</th>
                 <th>Cows Milked</th>
-                <th>Cows Numbers</th>
+                <th>Cow Numbers</th>
                 <th>Milking Average</th>
                 <th>Total Milk</th>
+
+            </tr>
+
+            {% for data in milk %}
+            <tr>
+                <td>{{data.milking_done}}</td>
+                <td>{{data.milk_today}}</td>
+                <td>{{data.milk_todate}}</td>
+                <td>{{data.cows_milked}}</td>
+                <td>{{data.cow_numbers}}</td>
+                <td>{{data.milking_average}}</td>
+                <td>{{data.total_milk}}</td>
+                <td><a class="btn btn-info btn-block bg-success btn btn-info"
+                       href="">Edit</a></td>
+                <td><a class="btn btn-info btn-block bg-danger btn btn-info"
+                       href="">Delete</a></td>
+                {% endfor %}
+            </tr>
+ <tr>
+                <td>#</td>
+                <td>#</td>
+                <td>#</td>
+                <td>#</td>
+                <td>#</td>
+                <td>#</td>
+                <td>#</td>
+
+            </tr>
+
+
+                <table class="table align-middle text-warning bg-dark">
+                <tr>
                 <th>Calf Down</th>
                 <th>Calf Numbers</th>
                 <th>Vet Cost</th>
                 <th>Update</th>
                 <th>Delete</th>
-            </tr>
 
-            {% for lit in Milk %}
-            <tr>
-                <td>{{lit.milking_done}}</td>
-                <td>{{lit.milk_today}}</td>
-                <td>{{lit.milk_todate}}</td>
-                <td>{{lit.cows_milked}}</td>
-                <td>{{lit.cows_numbers}}</td>
-                <td>{{lit.milking_average}}</td>
-                <td>{{lit.total_milk}}</td>
-                <td>{{lit.calf_down}}</td>
-                <td>{{lit.calf_numbers}}</td>
-                <td>{{lit.vet_cost}}</td>
-                <td><a class="btn btn-info btn-block bg-success btn btn-info" href="{% url 'Crop_data-update' data.id %}">Edit</a></td>
-                <td><a class="btn btn-info btn-block bg-danger btn btn-info" href="{% url 'Crop_data-delete' data.id %}">Delete</a></td>
+              {% for data in milk %}
+
+                <td>{{data.calf_down}}</td>
+                <td>{{data.calf_numbers}}</td>
+                <td>{{data.vet_cost}}</td>
+                <td><a class="btn btn-info btn-block bg-success btn btn-info"
+                       href="">Edit</a></td>
+                <td><a class="btn btn-info btn-block bg-danger btn btn-info"
+                       href="">Delete</a></td>
             </tr>
             {% endfor %}
 
@@ -61,16 +87,11 @@
                 <td>#</td>
                 <td>#</td>
                 <td>#</td>
-                <td>#</td>
-                <td>#</td>
-                <td>#</td>
-                <td>#</td>
-                <td>#</td>
-                <td>#</td>
-                <td>#</td>
+
             </tr>
 
         </table>
     </div>
+    <hr>
 </div>
 {% endblock %}
