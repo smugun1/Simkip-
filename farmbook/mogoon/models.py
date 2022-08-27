@@ -28,13 +28,16 @@ class Kandojobs(models.Model):
     pruning_done = models.DateTimeField(auto_now_add=False)
     pruned_block_No = models.IntegerField()
     pruned_bushes = models.IntegerField()
+    pruning_rate = models.DecimalField(max_digits=4, decimal_places=2, default=None)
     pruning_cost = models.DecimalField(max_digits=8, decimal_places=2)
     weeding_done = models.DateTimeField(auto_now_add=False, default=None)
     chemical_name = models.CharField(max_length=100, default=None)
     block_No = models.IntegerField(name=None, default=None)
-    cost_per_lit = models.FloatField(name=None, default=None)
+    cost_per_lit = models.DecimalField(max_digits=8, decimal_places=2)
     weeding_chem_amt = models.DecimalField(max_digits=8, decimal_places=2)
-    weeding_labour = models.IntegerField()
+    weeding_labour_number = models.IntegerField(name=None, default=None)
+    weeding_labour_rate = models.DecimalField(max_digits=8, decimal_places=2, default=None)
+    weeding_labour = models.IntegerField(name=None, default=None)
     weeding_cost = models.DecimalField(max_digits=8, decimal_places=2)
 
     def __str__(self):
@@ -63,6 +66,7 @@ class Milk(models.Model):
     calf_down = models.DateTimeField(auto_now_add=False)
     calf_numbers = models.IntegerField(blank=True)
     vet_cost = models.DecimalField(max_digits=8, decimal_places=2, blank=True)
+    Total_vet_cost = models.DecimalField(max_digits=8, decimal_places=2, blank=True)
 
     def __str__(self):
         return str(self.milk_today)

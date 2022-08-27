@@ -18,6 +18,7 @@
         <a class="btn btn-warning bg-primary btn-info block-lg" href="{% url 'mogoon-kandojobs_table_update'%}">Add</a>
         <form action="" method="POST">
             {% csrf_token %}
+
         </form>
 
         <hr>
@@ -28,20 +29,25 @@
                 <th>Pruning Date</th>
                 <th>Pruned Block No.</th>
                 <th>Pruned Bushes</th>
+                <th>Pruning Rate</th>
                 <th>Pruning Cost</th>
                 <th>Edit</th>
                 <th>Delete</th>
-                </tr>
-            {% for data in kanadojobs %}
+            </tr>
+
+            {% for d in data %}
+
             <tr>
                 <td>{{data.kandojobs}}</td>
                 <td>{{data.pruning_done}}</td>
-                <td>{{datab.pruned_block_No}}</td>
+                <td>{{data.pruned_block_No}}</td>
                 <td>{{data.pruned_bushes}}</td>
-                <td>{{datab.pruning_cost}}</td>
+                <td>{{data.pruning_rate}}</td>
+                <td>{{data.pruning_cost}}</td>
                 <td><a class="btn btn-info btn-block bg-primary btn btn-info" href="{% url 'Crop_data-update' data.id %}">Edit</a></td>
                 <td><a class="btn btn-info btn-block bg-danger btn btn-info" href="{% url 'Crop_data-delete' data.id %}">Delete</a></td>
             </tr>
+
             {% endfor %}
         </table>
         <h3 class="text-center bg-dark text-warning">Weeding Table</h3>
@@ -51,19 +57,25 @@
                 <th>Chemical Name</th>
                 <th>Block No.</th>
                 <th>Chemical amount</th>
-                <th>cost_per_lit</th>
+                <th>Cost Per Liter</th>
+                <th>Weeding Labour Number</th>
+                <th>Weeding Labour Rate</th>
                 <th>Weeding Labour</th>
                 <th>Weeding Cost</th>
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>
-            {% for data in kandojoba %}
+
+            {% for d in data %}
+
             <tr>
                 <td>{{data.weeding_done}}</td>
                 <td>{{data.chemical_name}}</td>
                 <td>{{data.block_No}}</td>
-                <td>{{data.weeding_chem_amt}}</td>
                 <td>{{data.cost_per_lit}}</td>
+                <td>{{data.weeding_chem_amt}}</td>
+                <td>{{data.weeding_labour_number}}</td>
+                <td>{{data.weeding_labour_rate}}</td>
                 <td>{{data.weeding_labour}}</td>
                 <td>{{data.weeding_cost}}</td>
                 <td><a class="btn btn-info btn-block bg-primary btn btn-info" href="{% url 'Crop_data-update' data.id %}">Edit</a></td>

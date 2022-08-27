@@ -1,5 +1,3 @@
-from datetime import datetime
-
 from django.db.models import Sum, F
 from django.shortcuts import render, redirect
 from django.views.decorators.cache import never_cache
@@ -94,7 +92,6 @@ def CropTableUpdate(request):
         crop_todate = Crop.objects.aggregate(all_sum=Sum('crop_today'))
     context = {
         "crop_todate": crop_todate,
-        "name": {"Farm data Notes"},
 
     }
     return render(request, 'mogoon/crop_table_update.html', context)
@@ -129,27 +126,33 @@ def KandojobsTable(request):
     pruning_done = models.DateTimeField()
     pruned_block_No = models.IntegerField()
     pruned_bushes = Kandojobs.objects.count()
-    pruning_cost = F(pruned_bushes) * F(input('pruning_rate'))
+    pruning_rate = models.DecimalField()
+    pruning_cost = F(pruned_bushes) * F(pruning_rate)
     weeding_done = models.DateTimeField()
     chemical_name = models.CharField()
     block_No = models.IntegerField()
-    cost_per_lit = input('cost_per_unit')
-    weeding_chem_amt = models.FloatField()
-    weeding_labour = F(input('labour_number') * F(input('labour_cost')))
-    weeding_cost = F(weeding_chem_amt) * (input(cost_per_lit))
+    cost_per_lit = models.DecimalField()
+    weeding_chem_amt = models.DecimalField()
+    weeding_labour_number = models.IntegerField()
+    weeding_labour_rate = models.DecimalField()
+    weeding_labour = F('weeding_labour_number') * F('weeding_labour_rate')
+    weeding_cost = F('weeding_chem_amt') * F(cost_per_lit)
 
     context = {
         "name": {"Kandojobs Table"},
         "kandojobs": data,
         "p_done": pruning_done,
-        "p_block_No": pruned_block_No,
+        "p_b_No": pruned_block_No,
         "p_bushes": pruned_bushes,
+        "pruning_rate": pruning_rate,
         "P_cost": pruning_cost,
         "w_done": weeding_done,
         "c_name": chemical_name,
         "b_No": block_No,
-        "c_per_lit": cost_per_lit,
-        "w_chem_amt": weeding_chem_amt,
+        "c_p_lit": cost_per_lit,
+        "w_c_amt": weeding_chem_amt,
+        "weeding_labour_number": weeding_labour_number,
+        "weeding_labour_rate": weeding_labour_rate,
         "w_labour": weeding_labour,
         "w_cost": weeding_cost,
     }
@@ -160,23 +163,27 @@ def KandojobsTable(request):
 def KandojobsTableUpdate(request):
     pruned_bushes = Kandojobs.objects.count()
 
-    pruning_cost = F(pruned_bushes) * F(input('pruning_rate'))
+    pruning_rate = models.DecimalField()
+    pruning_cost = F(pruned_bushes) * F(pruning_rate)
     block_No = models.IntegerField()
-    cost_per_lit = input()
-    weeding_chem_amt = models.FloatField()
-    weeding_labour = F(input('labour_number') * F(input('labour_cost')))
+    cost_per_lit = models.DecimalField()
+    weeding_labour_number = models.IntegerField()
+    weeding_labour_rate = models.DecimalField()
+    weeding_chem_amt = models.DecimalField()
+    weeding_labour = F(weeding_labour_number) * F(weeding_labour_rate)
 
-    weeding_cost = F(weeding_chem_amt) * (input(cost_per_lit))
+    weeding_cost = F(weeding_chem_amt) * cost_per_lit
     context = {
         "pruned_bushes": pruned_bushes,
+        "pruning_rate": pruning_rate,
         "pruning_cost": pruning_cost,
         "block_No": block_No,
         "cost_per_lit": cost_per_lit,
+        "weeding_labour_number": weeding_labour_number,
+        "weeding_labour_rate": weeding_labour_rate,
         "weeding_labour": weeding_labour,
         "weeding_chem_amt": weeding_chem_amt,
         "weeding_cost": weeding_cost,
-
-        "name": {"Farm data Notes"},
 
     }
     return render(request, 'mogoon/kandojobs_table_update.html', context)
@@ -185,23 +192,28 @@ def KandojobsTableUpdate(request):
 @never_cache
 def mogoonKandojobsCreate(request):
     if request.method == "POST":
+        pruning_done = request.POST['pruning_done']
         pruned_block_No = request.POST['pruned_block_No']
         pruned_bushes = request.POST['pruned_bushes']
-        pruning_done = request.POST['pruning_done']
+        pruning_rate = request.POST['pruning_rate']
         pruning_cost = request.POST['pruning_cost']
         weeding_done = request.POST['weeding_done']
         chemical_name = request.POST['chemical_name']
         block_No = request.POST['block_No']
         cost_per_lit = request.POST['cost_per_lit']
-        weeding_chem = request.POST['weeding_chem']
+        weeding_chem_amt = request.POST['weeding_chem_amt']
+        weeding_labour_number = request.POST['weeding_labour_number']
+        weeding_labour_rate = request.POST['weeding_labour_rate']
         weeding_labour = request.POST['weeding_labour']
         weeding_cost = request.POST['weeding_cost']
 
         insert = Kandojobs(pruned_block_No=pruned_block_No, pruned_bushes=pruned_bushes, pruning_done=pruning_done,
-                           pruning_cost=pruning_cost,
-                           weeding_done=weeding_done, chemical_name=chemical_name, block_No=block_No,
-                           cost_per_lit=cost_per_lit, weeding_chem=weeding_chem, weeding_labour=weeding_labour,
+                           pruning_rate=pruning_rate, pruning_cost=pruning_cost, weeding_done=weeding_done,
+                           chemical_name=chemical_name, block_No=block_No, cost_per_lit=cost_per_lit,
+                           weeding_chem_amt=weeding_chem_amt, weeding_labour_number=weeding_labour_number,
+                           weeding_labour_rate=weeding_labour_rate, weeding_labour=weeding_labour,
                            weeding_cost=weeding_cost)
+
         insert.save()
         return redirect('/kandojobs_table')
 
@@ -219,6 +231,7 @@ def MilkTable(request):
     calf_down = models.DateTimeField()
     calf_numbers = Milk.objects.count()
     vet_cost = models.FloatField()
+    Total_vet_cost = Milk.objects.aggregate(total_cost=Sum('vet_cost'))
 
     context = {
         "name": {"Milk Table"},
@@ -233,6 +246,7 @@ def MilkTable(request):
         "cf_down": calf_down,
         "cf_numbers": calf_numbers,
         "v_cost": vet_cost,
+        "T_v_cost": Total_vet_cost,
     }
     return render(request, 'mogoon/milk_table.html', context)
 
@@ -255,9 +269,10 @@ def MilkTableUpdate(request):
         # if it has an actual value get the milk_todate and pass it to the templates via the context, this value
         # appears in the form
         milk_todate = Milk.objects.aggregate(all_sum=Sum('milk_today'))
-
+    Total_vet_cost = Milk.objects.aggregate(total_cost=Sum('vet_cost'))
     context = {
         "milk_todate": milk_todate,
+        "Total_vet_cost": Total_vet_cost,
         "name": {"Milk table Update"},
 
     }
@@ -282,11 +297,12 @@ def mogoonMilkCreate(request):
         calf_down = request.POST['calf_down']
         calf_numbers = request.POST['calf_numbers']
         vet_cost = request.POST['vet_cost']
+        Total_vet_cost = request.POST['Total_vet_cost']
 
         insert = Milk(milking_done=milking_done, milk_today=milk_today, milk_todate=milk_todate,
                       cows_milked=cows_milked,
                       cow_numbers=cow_numbers, milking_average=milking_average, total_milk=total_milk,
-                      calf_down=calf_down, calf_numbers=calf_numbers, vet_cost=vet_cost)
+                      calf_down=calf_down, calf_numbers=calf_numbers, vet_cost=vet_cost, Total_vet_cost=Total_vet_cost)
         insert.save()
         return redirect('/milk_table')
 
@@ -361,7 +377,7 @@ def delete(request, pk):
     data = Crop.objects.get(id=pk)
     if request.method == 'POST':
         data.delete()
-        return redirect('/table')
+        return redirect('/crop_table')
 
     context = {
         'item': data,

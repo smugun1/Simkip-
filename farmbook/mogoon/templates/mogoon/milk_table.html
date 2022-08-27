@@ -4,7 +4,6 @@
 
 {% include 'Crop_data/delete.html' %}
 
-
 {% load static %}
 
 
@@ -61,7 +60,7 @@
                 <td>{{m_todate.all_sum}}</td>
                 <td></td>
                 <td>#</td>
-                <td>{% widthratio m_todate.all_sum c_numbers.all_quantity 1 %}</td>
+                <td>{% widthratio m_todate.all_sum c_milked.all_quantity 1 %}</td>
                 <td>{{t_milk.total_sum}}</td>
 
             </tr>
@@ -73,6 +72,7 @@
                 <th>Calf Down Date</th>
                 <th>Calf Numbers</th>
                 <th>Vet Cost</th>
+                <th>Total Vet Cost</th>
                 <th>Update</th>
                 <th>Delete</th>
                 </tr>
@@ -83,17 +83,17 @@
                 <td>{{data.calf_down}}</td>
                 <td>{{data.calf_numbers}}</td>
                 <td>{{data.vet_cost}}</td>
-                <td><a class="btn btn-info btn-block bg-primary btn btn-info"
-                       href="">Edit</a></td>
-                <td><a class="btn btn-info btn-block bg-danger btn btn-info"
-                       href="">Delete</a></td>
+                <td>{{data.Total_vet_cost}}</td>
+                <td><a class="btn btn-info btn-block bg-primary btn btn-info" href="{% url 'Crop_data-update' data.id %}">Edit</a></td>
+                <td><a class="btn btn-info btn-block bg-danger btn btn-info" href="{% url 'Crop_data-delete' data.id %}">Delete</a></td>
             </tr>
             {% endfor %}
 
             <tr>
                 <td>#</td>
                 <td>#</td>
-                <td>{{'cost'}}</td>
+                <td>{{v_cost.total_cost}}</td>
+                <td>{{t_v_cost.total_cost}}</td>
 
             </tr>
 
