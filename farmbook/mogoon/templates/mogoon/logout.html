@@ -1,0 +1,75 @@
+{% extends 'mogoon/base.html' %}
+
+
+{% load static %}
+
+
+<title>{% block title %} {% endblock %}</title>
+
+<link rel='stylesheet' href="{% static 'style.css' %}" type='text/css'>
+
+{% block body %}
+<!-- Section: Design Block -->
+<section class=" text-center text-lg-start">
+    <style>
+    .rounded-t-5 {
+      border-top-left-radius: 0.5rem;
+      border-top-right-radius: 0.5rem;
+    }
+
+    @media (min-width: 992px) {
+      .rounded-tr-lg-0 {
+        border-top-right-radius: 0;
+      }
+
+      .rounded-bl-lg-5 {
+        border-bottom-left-radius: 0.5rem;
+      }
+    }
+
+
+
+
+    </style>
+    <div class="card mb-3">
+        <div class="row g-0 d-flex align-items-center">
+
+            <div class="col-lg-4 d-none d-lg-flex">
+                {% load static %}<img src="{% static '/images/slide 1.jpg/' %}" class="d-block w-100 h-60" alt="...">
+            </div>
+            <div class="col-lg-4">
+                <div class="card-body py-5 px-md-5">
+
+                    <li class="nav-item card card">
+                        <a class="nav-link" href="#"
+                           onClick="document.getElementById('logoutform').submit()">
+                            <button type="button" class="btn btn-primary block-lg mb-4">Logout</button>
+                        </a>
+                        <a class="btn btn-warning bg-primary btn-info block-lg" href="{% url 'home' %}">Home</a>
+
+                    </li>
+                    <form id="logoutform" method="POST" action="{% url 'mogoon-logout_table' %}">
+                        {% csrf_token %}
+                        <input type="hidden">
+                        <!-- 2 column grid layout for inline styling -->
+                        <div class="row mb-4">
+                            <div class="col d-flex justify-content-center">
+                                <!-- Checkbox -->
+                                <div class="form-check card card bg-info">
+                                    <input class="form-check-input" type="checkbox" value="" id="form2Example31"
+                                           checked/>
+                                    <label class="form-check-label" for="form2Example31"> Remember me </label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-4 d-none d-lg-flex">
+                {% load static %}<img src="{% static '/images/slide 2.jpg/' %}" class="d-block w-100 h-60" alt="...">
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

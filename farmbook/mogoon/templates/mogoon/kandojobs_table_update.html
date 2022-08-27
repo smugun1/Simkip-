@@ -1,0 +1,92 @@
+{% extends 'mogoon/base.html' %}
+
+{% load static %}
+
+{% block title %}Kandojobs Table Update{% endblock %}
+
+{% block body %}
+<h5>This is the {{name}}</h5>
+
+
+{% if success %}
+<div class="alert alert-primary alert dismissible fade show" role="alert">
+    <strong>simple success alert—check it out!</strong> form submitted :
+    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+{% endif %}
+<div class="container fluid bg-info text-warning" style="width: 25rem;">
+    <div class="card card bg-dark text-right" style="width: 23rem;">
+        <h2 class="text-center text-warning">Kandojobs Table Update</h2>
+        <form action="{% url 'mogoon-kandojobs_create' %}" method="POST">
+            {% csrf_token %}
+            {{ form }}
+
+            <label for="formGroupExampleInput" class="form-label"><strong>pruned_block_No</strong></label>
+            <input style="height:40px;width:300px" class="form-control"
+                   id="formGroupExampleInput"  name="pruned_block_No">
+
+            <div class="col-sm col-sm">
+                <label for="formGroupExampleInput2" class="form-label"><strong>pruning_done</strong></label>
+                <input style="height:40px;width:300px" type="datetime-local" class="form-control" id="formGroupExampleInput2"
+                       placeholder="pruning_done" name="pruning_done">
+
+                <div class="col-sm col-sm">
+                    <label for="formGroupExampleInput2" class="form-label"><strong>pruned_bushes</strong></label>
+                    <input style="height:40px;width:300px" type="text" class="form-control" id="formGroupExampleInput3"
+                           placeholder="pruned_bushes" name="pruned_bushes">
+                </div>
+                <div class="col-sm col-sm">
+                    <label for="formGroupExampleInput2" class="form-label"><strong>pruning_cost</strong></label>
+                    <input style="height:40px;width:300px" type="text" class="form-control" id="formGroupExampleInput4"
+                           placeholder="pruning_cost" name="pruning_cost" value="" >
+                </div>
+                <div class="col-sm col-sm">
+                    <label for="formGroupExampleInput2" class="form-label"><strong>weeding_done</strong></label>
+                    <input style="height:40px;width:300px" type="datetime-local" class="form-control" id="formGroupExampleInput5"
+                           placeholder="weeding_done" name="weeding_done">
+                </div>
+                <div class="col-sm col-sm">
+                    <label for="formGroupExampleInput2" class="form-label"><strong>chemical_name</strong></label>
+                    <input style="height:40px;width:300px" type="text" class="form-control" id="formGroupExampleInput6"
+                           placeholder="chemical_name" name="chemical_name" value="">
+                </div>
+                <div class="col-sm col-sm">
+                    <label for="formGroupExampleInput2" class="form-label"><strong>block_No</strong></label>
+                    <input style="height:40px;width:300px" type="text" class="form-control" id="formGroupExampleInput7"
+                           placeholder="chemical_name" name="chemical_name" value="">
+                </div>
+                <div class="col-sm col-sm">
+                    <label for="formGroupExampleInput2" class="form-label"><strong>weeding_chem_amt</strong></label>
+                    <input style="height:40px;width:300px" type="text" class="form-control" id="formGroupExampleInput8"
+                           placeholder="weeding_chem_amt" name="weeding_chem_amt" value="">
+                </div>
+                <div class="col-sm col-sm">
+                    <label for="formGroupExampleInput2" class="form-label"><strong>cost_per_lit</strong></label>
+                    <input style="height:40px;width:300px" type="text" class="form-control" id="formGroupExampleInput9"
+                           placeholder="cost_per_lit" name="cost_per_lit" value="">
+                </div>
+                <div class="col-sm col-sm">
+                    <label for="formGroupExampleInput2" class="form-label"><strong>weeding_labour</strong></label>
+                    <input style="height:40px;width:300px" type="text" class="form-control" id="formGroupExampleInput10"
+                           placeholder="weeding_labour" name="weeding_labour" value="">
+                </div>
+                <div class="col-sm col-sm">
+                    <label for="formGroupExampleInput2" class="form-label"><strong>weeding_cost</strong></label>
+                    <input style="height:40px;width:300px" type="text" class="form-control" id="formGroupExampleInput11"
+                           placeholder="weeding_cost" name="weeding_cost" value="">
+                </div>
+                <div class="container my-3">
+                    <button class="btn btn-primary" type="submit" value="Update" name="update" typeof="hover">Submit</button>
+
+                    <a class="btn btn-warning bg-success btn-info block-lg" href="{% url 'mogoon-kandojobs_table' %}">Return</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+{% endblock %}

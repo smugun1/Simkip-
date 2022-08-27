@@ -1,0 +1,117 @@
+{% extends 'mogoon/base.html' %}
+
+{% load static %}
+
+{% block title %}Milk Table Update{% endblock %}
+
+{% block body %}
+
+
+<h5 xmlns="" xmlns="">{{name}}</h5>
+<section class=" text-center text-lg-start">
+  <style>
+    .rounded-t-5 {
+      border-top-left-radius: 0.5rem;
+      border-top-right-radius: 0.5rem;
+    }
+
+    @media (min-width: 992px) {
+      .rounded-tr-lg-0 {
+        border-top-right-radius: 0;
+      }
+
+      .rounded-bl-lg-5 {
+        border-bottom-left-radius: 0.5rem;
+      }
+    }
+  </style>
+
+<div class="row g-0 d-flex align-items-center">
+<div class="col-lg-4 d-none d-lg-flex ">
+
+    <div class="card card bg-dark text-right" style="width: 23rem;">
+        <h2 class="text-center text-warning">Milk Table Update</h2>
+        <form action="{% url 'mogoon-milk_create' %}" method="POST">
+            {% csrf_token %}
+            {{ form }}
+
+            <label for="formGroupExampleInput" class="form-label"><strong>milking_done</strong></label>
+            <input style="height:40px;width:300px" type="datetime-local" class="form-control"
+                   id="formGroupExampleInput" placeholder="milking_done" name="milking_done">
+
+                <div class="col-sm col-sm">
+                    <label for="formGroupExampleInput2" class="form-label"><strong>milk_today</strong></label>
+                    <input style="height:40px;width:300px" class="form-control" id="formGroupExampleInput2" placeholder="milking_today"
+                           name="milk_today">
+                </div>
+
+                <div class="col-sm col-sm">
+                    <label for="formGroupExampleInput2" class="form-label"><strong>milk_todate</strong></label>
+                    <input style="height:40px;width:300px" type="text" class="form-control" id="formGroupExampleInput3"
+                           placeholder="milk_todate" name="milk_todate" value="{{milk_todate.all_sum}}" readonly>
+                </div>
+                <div class="col-sm col-sm">
+                    <label for="formGroupExampleInput2" class="form-label"><strong>cows_milked</strong></label>
+                    <input style="height:40px;width:300px" type="text" class="form-control" id="formGroupExampleInput4"
+                           placeholder="cows_milked" name="cows_milked">
+                </div>
+                <div class="col-sm col-sm">
+                    <label for="formGroupExampleInput2" class="form-label"><strong>cow_numbers</strong></label>
+                    <input style="height:40px;width:300px" type="text" class="form-control" id="formGroupExampleInput5"
+                           placeholder="cow_numbers" name="cow_numbers">
+                </div>
+                <div class="col-sm col-sm">
+                    <label for="formGroupExampleInput2" class="form-label"><strong>milking_average</strong></label>
+                    <input style="height:40px;width:300px" type="text" class="form-control" id="formGroupExampleInput6"
+                           placeholder="milking_average" name="milking_average"
+                           value="{% widthratio lit.milk_today lit.cows_numbers 1 %}">
+                </div>
+                <div class="col-sm col-sm">
+                    <label for="formGroupExampleInput2" class="form-label"><strong>total_milk</strong></label>
+                    <input style="height:40px;width:300px" type="text" class="form-control" id="formGroupExampleInput7"
+                           placeholder="total_milk" name="total_milk" value="">
+                </div>
+
+
+
+                <div class="col-sm col-sm">
+                    <label for="formGroupExampleInput2"
+                           class="form-label"><strong>calf_down</strong></label>
+                    <input style="height:40px;width:300px" type="datetime-local"
+                           class="form-control"
+                           id="formGroupExampleInput8"
+                           placeholder="calf_down" name="calf_down" value="{{form.deadline_date.value | date:'d M Y'}}">
+                </div>
+
+
+                <div class="col-sm col-sm">
+                    <label for="formGroupExampleInput2"
+                           class="form-label"><strong>calf_numbers</strong></label>
+                    <input style="height:40px;width:300px" type="text" class="form-control"
+                           id="formGroupExampleInput9"
+                           placeholder="calf_numbers" name="calf_numbers" value="">
+
+                </div>
+                <div class="col-sm col-sm">
+                    <label for="formGroupExampleInput2" class="form-label"><strong>vet_cost</strong></label>
+                    <input style="height:40px;width:300px" type="text" class="form-control"
+                           id="formGroupExampleInput10"
+                           placeholder="vet_cost" name="vet_cost" value="">
+                </div>
+                <div class="container my-3">
+                    <button class="btn btn-primary" type="submit" value="Update" name="update"
+                            typeof="hover">
+                        Submit</button>
+
+                    <a class="btn btn-warning bg-warning btn-info block-lg"
+                       href="{% url 'mogoon-milk_table' %}">Return</a>
+                </div>
+        </form>
+        </div>
+</div>
+</div>
+</section>
+
+
+
+{% endblock %}
