@@ -27,5 +27,4 @@ urlpatterns = [
 
     path('update/<int:pk>/', views.update, name='Crop_data-update'),
     path('delete/<int:pk>/', views.delete, name='Crop_data-delete'),
-
 ]

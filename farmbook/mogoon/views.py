@@ -133,25 +133,25 @@ def KandojobsTable(request):
     weeding_done = models.DateTimeField()
     chemical_name = models.CharField()
     block_No = models.IntegerField()
-    cost_per_lit = input()
+    cost_per_lit = input('cost_per_unit')
     weeding_chem_amt = models.FloatField()
     weeding_labour = F(input('labour_number') * F(input('labour_cost')))
     weeding_cost = F(weeding_chem_amt) * (input(cost_per_lit))
 
     context = {
         "name": {"Kandojobs Table"},
-        "Kandojobs": data,
-        "pruning_done": pruning_done,
-        "pruned_block_No": pruned_block_No,
-        "pruned_bushes": pruned_bushes,
-        "Pruning_cost": pruning_cost,
-        "weeding_done": weeding_done,
-        "chemical_name": chemical_name,
-        "block_No": block_No,
-        "cost_per_lit": cost_per_lit,
-        "weeding_chem_amt": weeding_chem_amt,
-        "weeding_labour": weeding_labour,
-        "weeding_cost": weeding_cost,
+        "kandojobs": data,
+        "p_done": pruning_done,
+        "p_block_No": pruned_block_No,
+        "p_bushes": pruned_bushes,
+        "P_cost": pruning_cost,
+        "w_done": weeding_done,
+        "c_name": chemical_name,
+        "b_No": block_No,
+        "c_per_lit": cost_per_lit,
+        "w_chem_amt": weeding_chem_amt,
+        "w_labour": weeding_labour,
+        "w_cost": weeding_cost,
     }
     return render(request, 'mogoon/kandojobs_table.html', context)
 
@@ -255,9 +255,10 @@ def MilkTableUpdate(request):
         # if it has an actual value get the milk_todate and pass it to the templates via the context, this value
         # appears in the form
         milk_todate = Milk.objects.aggregate(all_sum=Sum('milk_today'))
+
     context = {
         "milk_todate": milk_todate,
-        "name": {"Farm data Notes"},
+        "name": {"Milk table Update"},
 
     }
     return render(request, 'mogoon/milk_table_update.html', context)

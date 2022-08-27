@@ -26,17 +26,20 @@
         <table class="table align-middle text-warning bg-dark">
 
             <tr>
-                <th>Milking Done</th>
+                <th>Milking Date</th>
                 <th>Milk Today</th>
                 <th>Milk Todate</th>
                 <th>Cows Milked</th>
                 <th>Cow Numbers</th>
                 <th>Milking Average</th>
                 <th>Total Milk</th>
+                <th>Edit</th>
+                <th>Delete</th>
 
             </tr>
 
             {% for data in milk %}
+
             <tr>
                 <td>{{data.milking_done}}</td>
                 <td>{{data.milk_today}}</td>
@@ -45,38 +48,42 @@
                 <td>{{data.cow_numbers}}</td>
                 <td>{{data.milking_average}}</td>
                 <td>{{data.total_milk}}</td>
-                <td><a class="btn btn-info btn-block bg-success btn btn-info"
+                <td><a class="btn btn-info btn-block bg-primary btn btn-info"
                        href="">Edit</a></td>
                 <td><a class="btn btn-info btn-block bg-danger btn btn-info"
                        href="">Delete</a></td>
                 {% endfor %}
             </tr>
+
  <tr>
                 <td>#</td>
+                <td>{{m_todate.all_sum}}</td>
+                <td>{{m_todate.all_sum}}</td>
+                <td></td>
                 <td>#</td>
-                <td>#</td>
-                <td>#</td>
-                <td>#</td>
-                <td>#</td>
-                <td>#</td>
+                <td>{% widthratio m_todate.all_sum c_numbers.all_quantity 1 %}</td>
+                <td>{{t_milk.total_sum}}</td>
 
             </tr>
 
-
-                <table class="table align-middle text-warning bg-dark">
+        </table>
+        <div></div>
+        <table class="table align-middle text-warning bg-dark">
                 <tr>
-                <th>Calf Down</th>
+                <th>Calf Down Date</th>
                 <th>Calf Numbers</th>
                 <th>Vet Cost</th>
                 <th>Update</th>
                 <th>Delete</th>
+                </tr>
 
               {% for data in milk %}
 
+            <tr>
                 <td>{{data.calf_down}}</td>
                 <td>{{data.calf_numbers}}</td>
                 <td>{{data.vet_cost}}</td>
-                <td><a class="btn btn-info btn-block bg-success btn btn-info"
+                <td><a class="btn btn-info btn-block bg-primary btn btn-info"
                        href="">Edit</a></td>
                 <td><a class="btn btn-info btn-block bg-danger btn btn-info"
                        href="">Delete</a></td>
@@ -86,7 +93,7 @@
             <tr>
                 <td>#</td>
                 <td>#</td>
-                <td>#</td>
+                <td>{{'cost'}}</td>
 
             </tr>
 
