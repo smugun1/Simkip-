@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.views.decorators.cache import never_cache
 
 from . import models
-from .forms import TaskForm, UpdateTaskForm
+from .forms import TaskForm, UpdateTaskForm, UpdateFertilizerForm, UpdateKandojobsForm, UpdateMilkForm
 from .models import *
 
 
@@ -136,7 +136,7 @@ def KandojobsTable(request):
     weeding_labour_number = models.IntegerField()
     weeding_labour_rate = models.DecimalField()
     weeding_labour = F('weeding_labour_number') * F('weeding_labour_rate')
-    weeding_cost = F('weeding_chem_amt') * F(cost_per_lit)
+    weeding_cost = F('weeding_chem_amt') * F(cost_per_lit) + F(weeding_labour)
 
     context = {
 
@@ -162,22 +162,21 @@ def KandojobsTable(request):
 @never_cache
 def KandojobsTableUpdate(request):
     pruned_bushes = Kandojobs.objects.count()
-
     pruning_rate = models.DecimalField()
     pruning_cost = F(pruned_bushes) * F(pruning_rate)
-    block_No = models.IntegerField()
+
     cost_per_lit = models.DecimalField()
     weeding_labour_number = models.IntegerField()
     weeding_labour_rate = models.DecimalField()
     weeding_chem_amt = models.DecimalField()
     weeding_labour = F(weeding_labour_number) * F(weeding_labour_rate)
+    weeding_cost = F(weeding_chem_amt) * F(cost_per_lit) + F(weeding_labour)
 
-    weeding_cost = F(weeding_chem_amt) * cost_per_lit
     context = {
         "pruned_bushes": pruned_bushes,
         "pruning_rate": pruning_rate,
         "pruning_cost": pruning_cost,
-        "block_No": block_No,
+
         "cost_per_lit": cost_per_lit,
         "weeding_labour_number": weeding_labour_number,
         "weeding_labour_rate": weeding_labour_rate,
@@ -235,7 +234,7 @@ def MilkTable(request):
 
     context = {
 
-        "milk": data,
+        "Milk": data,
         "m_done": milking_done,
         "m_today": milk_today,
         "m_todate": milk_todate,
@@ -274,7 +273,6 @@ def MilkTableUpdate(request):
         "milk_todate": milk_todate,
         "Total_vet_cost": Total_vet_cost,
 
-
     }
     return render(request, 'mogoon/milk_table_update.html', context)
 
@@ -282,9 +280,9 @@ def MilkTableUpdate(request):
 @never_cache
 def mogoonMilkCreate(request):
     if request.method == "POST":
-        # this function saves a new record from the notes form. The milk_todate is the milk todate gotten from the
-        # form(that was passed from the notes function) plus the milk today entered in the form.
-        # Initially the crop to date is zero when the dta base is empty. the new milk to date will be zero plus the crop
+        # this function saves a new record from the notes form. The milk_todate is the Milk todate gotten from the
+        # form(that was passed from the notes function) plus the Milk today entered in the form.
+        # Initially the crop to date is zero when the dta base is empty. the new Milk to date will be zero plus the crop
         # today entered in the form, this addition is inserted and saved in the database as crop todate as shown below.
         milking_done = request.POST['milking_done']
         milk_today = request.POST['milk_today']
@@ -399,3 +397,99 @@ def delete(request, pk):
         'item': data,
     }
     return render(request, 'Crop_data/delete.html', context)
+
+
+@never_cache
+def F_update(request, pk):
+    data = Fertilizer.objects.get(id=pk)
+    if request.method == 'POST':
+        form = UpdateFertilizerForm(request.POST, instance=data)
+        if form.is_valid():
+            form.save()
+            return redirect('/fertilizer_table')
+
+    else:
+        form = UpdateFertilizerForm(instance=data)
+
+    context = {
+        'form': form, 'UpdateFertilizerForm': UpdateFertilizerForm,
+
+    }
+    return render(request, 'Fertilizer/update.html', context)
+
+
+@never_cache
+def F_delete(request, pk):
+    data = Fertilizer.objects.get(id=pk)
+    if request.method == 'POST':
+        data.delete()
+        return redirect('/fertilizer_table')
+
+    context = {
+        'item': data,
+    }
+    return render(request, 'Fertilizer/delete.html', context)
+
+
+@never_cache
+def K_update(request, pk):
+    data = Kandojobs.objects.get(id=pk)
+    if request.method == 'POST':
+        form = UpdateKandojobsForm(request.POST, instance=data)
+        if form.is_valid():
+            form.save()
+            return redirect('/kandojobs_table')
+
+    else:
+        form = UpdateKandojobsForm(instance=data)
+
+    context = {
+        'form': form, 'UpdateKandojobsForm': UpdateKandojobsForm,
+
+    }
+    return render(request, 'Kandojobs/update.html', context)
+
+
+@never_cache
+def K_delete(request, pk):
+    data = Kandojobs.objects.get(id=pk)
+    if request.method == 'POST':
+        data.delete()
+        return redirect('/kandojobs_table')
+
+    context = {
+        'item': data,
+    }
+    return render(request, 'Kandojobs/delete.html', context)
+
+
+@never_cache
+def M_update(request, pk):
+    data = Milk.objects.get(id=pk)
+    if request.method == 'POST':
+        form = UpdateMilkForm(request.POST, instance=data)
+        if form.is_valid():
+            form.save()
+            return redirect('/milk_table')
+
+    else:
+        form = UpdateMilkForm(instance=data)
+
+    context = {
+        'form': form, 'UpdateMilkForm': UpdateMilkForm,
+
+    }
+    return render(request, 'Milk/update.html', context)
+
+
+@never_cache
+def M_delete(request, pk):
+    data = Milk.objects.get(id=pk)
+    if request.method == 'POST':
+        data.delete()
+        return redirect('/milk_table')
+
+    context = {
+        'item': data,
+    }
+    return render(request, 'Milk/delete.html', context)

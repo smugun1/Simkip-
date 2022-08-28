@@ -34,7 +34,7 @@
                 <th>Update</th>
                 <th>Delete</th>
             </tr>
-            {% for i in fertilizer %}
+            {% for data in fertilizer %}
             <tr>
                 <td>{{data.fertilizer}}</td>
                 <td>{{data.fertilizer_applied}}</td>
@@ -44,9 +44,9 @@
                 <td>{{data.fertilizer_price}}</td>
                 <td>{{data.fertilizer_cost}}</td>
                 <td><a class="btn btn-info btn-block bg-primary btn btn-info"
-                       href="">Edit</a></td>
+                       href="{% url 'fertilizer-update' data.id %}">Edit</a></td>
                 <td><a class="btn btn-info btn-block bg-danger btn btn-info"
-                       href="">Delete</a></td>
+                       href="{% url 'fertilizer-delete' data.id %}">Delete</a></td>
             </tr>
             {% endfor %}
             <tr>

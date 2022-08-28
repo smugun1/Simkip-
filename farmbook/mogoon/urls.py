@@ -27,4 +27,11 @@ urlpatterns = [
 
     path('update/<int:pk>/', views.update, name='Crop_data-update'),
     path('delete/<int:pk>/', views.delete, name='Crop_data-delete'),
+    path('f_update/<int:pk>/', views.F_update, name='fertilizer-update'),
+    path('f_delete/<int:pk>/', views.F_delete, name='fertilizer-delete'),
+    path('k_update/<int:pk>/', views.K_update, name='kandojobs-update'),
+    path('k_delete/<int:pk>/', views.K_delete, name='kandojobs-delete'),
+    path('m_update/<int:pk>/', views.M_update, name='milk-update'),
+    path('m_delete/<int:pk>/', views.M_delete, name='milk-delete'),
+
 ]

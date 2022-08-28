@@ -84,8 +84,8 @@
                 <td>{{data.calf_numbers}}</td>
                 <td>{{data.vet_cost}}</td>
                 <td>{{data.Total_vet_cost}}</td>
-                <td><a class="btn btn-info btn-block bg-primary btn btn-info" href="{% url 'Crop_data-update' data.id %}">Edit</a></td>
-                <td><a class="btn btn-info btn-block bg-danger btn btn-info" href="{% url 'Crop_data-delete' data.id %}">Delete</a></td>
+                <td><a class="btn btn-info btn-block bg-primary btn btn-info" href="{% url 'milk-update' data.id %}">Edit</a></td>
+                <td><a class="btn btn-info btn-block bg-danger btn btn-info" href="{% url 'milk-delete' data.id %}">Delete</a></td>
             </tr>
             {% endfor %}
 
