@@ -27,17 +27,21 @@
                 <th>Fertilizer</th>
                 <th>Fertilizer_Applied Date</th>
                 <th>Fertilizer Amount</th>
+                <th>Fertilizer Labour Rate</th>
                 <th>Fertilizer Labour</th>
+                <th>Fertilizer Price</th>
                 <th>Fertilizer Cost</th>
                 <th>Update</th>
                 <th>Delete</th>
             </tr>
-            {% for data in fertilizer %}
+            {% for i in fertilizer %}
             <tr>
                 <td>{{data.fertilizer}}</td>
                 <td>{{data.fertilizer_applied}}</td>
                 <td>{{data.fertilizer_amt}}</td>
+                <td>{{data.fertilizer_labour_rate}}</td>
                 <td>{{data.fertilizer_labour}}</td>
+                <td>{{data.fertilizer_price}}</td>
                 <td>{{data.fertilizer_cost}}</td>
                 <td><a class="btn btn-info btn-block bg-primary btn btn-info"
                        href="">Edit</a></td>

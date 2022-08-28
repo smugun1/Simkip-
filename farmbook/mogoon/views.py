@@ -56,7 +56,7 @@ def CropTable(request):
     total_crop = Crop.objects.aggregate(total_sum=Sum('crop_todate'))
 
     context = {
-        "name": {"Crop Table"},
+
         "crop_data": data,
         "plucking_date": plucking_date,
         "c_today": crop_today,
@@ -139,7 +139,7 @@ def KandojobsTable(request):
     weeding_cost = F('weeding_chem_amt') * F(cost_per_lit)
 
     context = {
-        "name": {"Kandojobs Table"},
+
         "kandojobs": data,
         "p_done": pruning_done,
         "p_b_No": pruned_block_No,
@@ -234,7 +234,7 @@ def MilkTable(request):
     Total_vet_cost = Milk.objects.aggregate(total_cost=Sum('vet_cost'))
 
     context = {
-        "name": {"Milk Table"},
+
         "milk": data,
         "m_done": milking_done,
         "m_today": milk_today,
@@ -273,7 +273,7 @@ def MilkTableUpdate(request):
     context = {
         "milk_todate": milk_todate,
         "Total_vet_cost": Total_vet_cost,
-        "name": {"Milk table Update"},
+
 
     }
     return render(request, 'mogoon/milk_table_update.html', context)
@@ -312,15 +312,19 @@ def FertilizerTable(request):
     data = Fertilizer.objects.all()
     fertilizer_applied = models.DateTimeField()
     fertilizer_amt = Fertilizer.objects.count()
-    fertilizer_labour = Fertilizer.objects.aggregate(all_sum=Sum(input('labour')))
-    fertilizer_cost = F(fertilizer_amt) * F(cost=5400) + F(input('labour') * 300)
+    fertilizer_labour_rate = models.DecimalField()
+    fertilizer_labour = F(fertilizer_amt) * F(fertilizer_labour_rate)
+    fertilizer_price = models.DecimalField()
+    fertilizer_cost = F(fertilizer_amt) * F(fertilizer_price) + F(fertilizer_price)
 
     context = {
-        "name": {"Fertilizer Table"},
+
         "fertilizer": data,
         "fertilizer_applied": fertilizer_applied,
         "fertilizer_amt": fertilizer_amt,
+        "fertilizer_labour_rate": fertilizer_labour_rate,
         "fertilizer_labour": fertilizer_labour,
+        "fertilizer_price": fertilizer_price,
         "fertilizer_cost": fertilizer_cost,
 
     }
@@ -330,10 +334,18 @@ def FertilizerTable(request):
 @never_cache
 def mogoonFertilizerTableUpdate(request):
     fertilizer_amt = Fertilizer.objects.count()
-    context = {
-        "fertilizer_amt": fertilizer_amt,
-        "name": {"Fertilizer Table"},
 
+    fertilizer_labour_rate = models.DecimalField()
+    fertilizer_labour = F(fertilizer_amt) * F(fertilizer_labour_rate)
+    fertilizer_price = models.DecimalField()
+
+    fertilizer_cost = F(fertilizer_amt) * F(fertilizer_price) + F(fertilizer_labour)
+    context = {
+
+        "fertilizer_amt": fertilizer_amt,
+        "fertilizer_labour_rate": fertilizer_labour_rate,
+        "fertilizer_labour": fertilizer_labour,
+        "fertilizer_cost": fertilizer_cost,
     }
     return render(request, 'mogoon/fertilizer_table_update.html', context)
 
@@ -343,11 +355,15 @@ def mogoonFertilizerCreate(request):
     if request.method == "POST":
         fertilizer = request.POST['fertilizer']
         fertilizer_applied = request.POST['fertilizer_applied']
+        fertilizer_labour_rate = request.POST['fertilizer_labour_rate']
         fertilizer_amt = request.POST['fertilizer_amt']
         fertilizer_labour = request.POST['fertilizer_labour']
+        fertilizer_price = request.POST['fertilizer_price']
         fertilizer_cost = request.POST['fertilizer_cost']
+
         insert = Fertilizer(fertilizer=fertilizer, fertilizer_applied=fertilizer_applied, fertilizer_amt=fertilizer_amt,
-                            fertilizer_labour=fertilizer_labour,
+                            fertilizer_labour_rate=fertilizer_labour_rate,
+                            fertilizer_labour=fertilizer_labour, fertilizer_price=fertilizer_price,
                             fertilizer_cost=fertilizer_cost)
         insert.save()
         return redirect('/fertilizer_table')
