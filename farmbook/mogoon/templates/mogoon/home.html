@@ -3,20 +3,28 @@
 {% load static %}
 
 {% block title %} Home {% endblock %}
-{% include 'Crop_data/update-form.html' %}
+
 {% block body %}
 
-<p><em> This is the reports home page </em></p>
-
 <hr width="99%" color="#ff00ff" size="16">
+<p class="text-center"><em> This is the reports home page </em></p>
+
 <div class="container fluid bg-light text-warning" style="width: 50rem;">
         <form class="was-validated">
             <div class="mb-3">
                 <label for="validationTextarea" class="form-label">Daily report Comment</label>
-                <textarea class="form-control" id="validationTextarea" placeholder="Required example textarea"
+                <textarea class="form-control" id="validationTextarea" placeholder="Enter comments on farm activities"
                           required></textarea>
                 <div class="invalid-feedback">
-                    Please enter a message in the textarea.
+                    Please enter comments on farm activities.
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="validationTextarea" class="form-label">Daily report Comment</label>
+                <textarea class="form-control" id="validationTextarea1" placeholder="Enter comments on farm activities"
+                          required></textarea>
+                <div class="invalid-feedback">
+                    Please enter comments on farm activities.
                 </div>
             </div>
 

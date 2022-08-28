@@ -35,7 +35,7 @@
                 <th>Delete</th>
             </tr>
 
-            {% for data in data %}
+            {% for data in Kandojobs %}
 
             <tr>
                 <td>{{data.kandojobs}}</td>
@@ -66,7 +66,7 @@
                 <th>Delete</th>
             </tr>
 
-            {% for data in data %}
+            {% for data in Kandojobs %}
 
             <tr>
                 <td>{{data.weeding_done}}</td>
@@ -78,8 +78,8 @@
                 <td>{{data.weeding_labour_rate}}</td>
                 <td>{{data.weeding_labour}}</td>
                 <td>{{data.weeding_cost}}</td>
-                <td><a class="btn btn-info btn-block bg-primary btn btn-info" href="{% url 'Crop_data-kandojobs' data.id %}">Edit</a></td>
-                <td><a class="btn btn-info btn-block bg-danger btn btn-info" href="{% url 'Crop_data-kandojobs' data.id %}">Delete</a></td>
+                <td><a class="btn btn-info btn-block bg-primary btn btn-info" href="{% url 'kandojobs-update' data.id %}">Edit</a></td>
+                <td><a class="btn btn-info btn-block bg-danger btn btn-info" href="{% url 'kandojobs-delete' data.id %}">Delete</a></td>
             </tr>
             {% endfor %}
         </table>

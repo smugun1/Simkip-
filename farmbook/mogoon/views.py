@@ -367,6 +367,7 @@ def mogoonFertilizerCreate(request):
         return redirect('/fertilizer_table')
 
 
+# CRUD functionality for the tables
 @never_cache
 def update(request, pk):
     data = Crop.objects.get(id=pk)

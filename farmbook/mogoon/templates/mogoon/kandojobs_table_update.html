@@ -13,7 +13,7 @@
         <form action="{% url 'mogoon-kandojobs_create' %}" method="POST">
             {% csrf_token %}
             {{ form }}
-
+        <div class="container">
             <div class="col-sm col-sm">
                 <label for="formGroupExampleInput2" class="form-label"><strong>pruning_done</strong></label>
                 <input style="height:40px;width:300px" type="datetime-local" class="form-control"
@@ -41,6 +41,8 @@
                 <input style="height:40px;width:300px" type="text" class="form-control" id="formGroupExampleInput5"
                        placeholder="pruning_cost" name="pruning_cost" value="">
             </div>
+        </div>
+        <div class="container align-items-center">
             <div class="col-sm col-sm">
                 <label for="formGroupExampleInput2" class="form-label"><strong>weeding_done</strong></label>
                 <input style="height:40px;width:300px" type="datetime-local" class="form-control"
@@ -55,7 +57,7 @@
             <div class="col-sm col-sm">
                 <label for="formGroupExampleInput2" class="form-label"><strong>block_No</strong></label>
                 <input style="height:40px;width:300px" type="text" class="form-control" id="formGroupExampleInput8"
-                       placeholder="block_No" name="" value="block_No">
+                       placeholder="block_No" name="block_No" value="">
             </div>
 
             <div class="col-sm col-sm">
@@ -100,10 +102,11 @@
                 <a class="btn btn-warning bg-success btn-info block-lg"
                    href="{% url 'mogoon-kandojobs_table' %}">Return</a>
             </div>
-
+</div>
         </form>
     </div>
-</div>
+    </div>
+
 
 
 {% endblock %}
