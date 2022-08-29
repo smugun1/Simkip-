@@ -20,8 +20,17 @@
 
                     <div class="col-sm col-sm">
                         <label for="formGroupExampleInput2" class="form-label"><strong>fertilizer</strong></label>
-                        <input style="height:40px;width:300px" type="text" class="form-control" id="formGroupExampleInput1"
-                               placeholder="fertilizer" name="fertilizer">
+                        <select style="height:40px;width:300px" class="form-control" id="formGroupExampleInput1"
+                        name="fertilizer">
+                          <option selected disabled>choose option</option>
+                          <option value="NPK">NPK 25:5:5:2s</option>
+                          <option value="NPK">NPK 26:10:5</option>
+                          <option value="SOA">SOA</option>
+                          <option value="Urea">Urea</option>
+                          <option value="Manure">Manure</option>
+                          <option value="Other">Other</option>
+                          <option value="None">None</option>
+                </select>
                     </div>
                     <div class="col-sm col-sm">
                         <label for="formGroupExampleInput2"
@@ -33,15 +42,21 @@
                     <div class="col-sm col-sm">
                         <label for="formGroupExampleInput2" class="form-label"><strong>fertilizer_amt</strong></label>
                         <input style="height:40px;width:300px" type="text" class="form-control" id="formGroupExampleInput3"
-                               placeholder="fertilizer_amt" name="fertilizer_amt" value="">
+                               placeholder="How many bags?" name="fertilizer_amt" value="">
                     </div>
 
 
                     <div class="col-sm col-sm">
                         <label for="formGroupExampleInput2"
                                class="form-label"><strong>fertilizer_labour_rate</strong></label>
-                        <input style="height:40px;width:300px" type="text" class="form-control" id="formGroupExampleInput4"
-                               placeholder="fertilizer_labour_rate" name="fertilizer_labour_rate" value="">
+                        <select style="height:40px;width:300px" class="form-control" id="formGroupExampleInput4"
+                        name="fertilizer_labour_rate">
+                          <option selected disabled>choose option</option>
+                          <option value="120">120.00</option>
+                          <option value="150">150.00</option>
+                          <option value="200">200.00</option>
+                          <option value="0.0">0.0</option>
+                </select>
                     </div>
 
 
@@ -53,15 +68,28 @@
 
                     </div>
                     <div class="col-sm col-sm">
-                        <label for="formGroupExampleInput2" class="form-label"><strong>fertilizer_price</strong></label>
+                        <label for="formGroupExampleInput2"
+                               class="form-label"><strong>fertilizer_labour_cost</strong></label>
                         <input style="height:40px;width:300px" type="text" class="form-control" id="formGroupExampleInput6"
+                               placeholder="fertilizer_labour_cost" name="fertilizer_labour_cost" value="">
+
+                    </div>
+                    <div class="col-sm col-sm">
+                        <label for="formGroupExampleInput2" class="form-label"><strong>fertilizer_price</strong></label>
+                        <input style="height:40px;width:300px" type="text" class="form-control" id="formGroupExampleInput7"
                                placeholder="fertilizer_price" name="fertilizer_price" value="">
 
                     <div class="col-sm col-sm">
                         <label for="formGroupExampleInput2"
                                class="form-label"><strong>fertilizer_cost</strong></label>
-                        <input style="height:40px;width:300px" type="text" class="form-control" id="formGroupExampleInput7"
+                        <input style="height:40px;width:300px" type="text" class="form-control" id="formGroupExampleInput8"
                                placeholder="fertilizer_cost" name="fertilizer_cost" value="">
+                    </div>
+                        <div class="col-sm col-sm">
+                        <label for="formGroupExampleInput2"
+                               class="form-label"><strong>fertilizer_total_cost</strong></label>
+                        <input style="height:40px;width:300px" type="text" class="form-control" id="formGroupExampleInput9"
+                               placeholder="fertilizer_total_cost" name="fertilizer_total_cost" value="">
                     </div>
                     <div class="container my-3">
                         <button class="btn btn-primary" type="submit" value="Update" name="update"

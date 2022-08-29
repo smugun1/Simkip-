@@ -47,11 +47,13 @@ class Kandojobs(models.Model):
 class Fertilizer(models.Model):
     fertilizer = models.CharField(max_length=20)
     fertilizer_applied = models.DateTimeField(auto_now_add=False)
-    fertilizer_amt = models.DecimalField(max_digits=8, decimal_places=2)
+    fertilizer_amt = models.IntegerField()
     fertilizer_labour_rate = models.DecimalField(max_digits=8, decimal_places=2, default=None)
     fertilizer_labour = models.IntegerField()
+    fertilizer_labour_cost = models.DecimalField(max_digits=8, decimal_places=2, default=None)
     fertilizer_price = models.DecimalField(max_digits=8, decimal_places=2, default=None)
     fertilizer_cost = models.DecimalField(max_digits=8, decimal_places=2)
+    fertilizer_total_cost = models.DecimalField(max_digits=8, decimal_places=2, default=None)
 
     def __str__(self):
         return str(self.fertilizer_amt)

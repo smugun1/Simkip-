@@ -29,8 +29,10 @@
                 <th>Fertilizer Amount</th>
                 <th>Fertilizer Labour Rate</th>
                 <th>Fertilizer Labour</th>
+                <th>Fertilizer Labour Cost</th>
                 <th>Fertilizer Price</th>
                 <th>Fertilizer Cost</th>
+                <th>Fertilizer Total Cost</th>
                 <th>Update</th>
                 <th>Delete</th>
             </tr>
@@ -41,8 +43,10 @@
                 <td>{{data.fertilizer_amt}}</td>
                 <td>{{data.fertilizer_labour_rate}}</td>
                 <td>{{data.fertilizer_labour}}</td>
+                <td>{{data.fertilizer_labour_cost}}</td>
                 <td>{{data.fertilizer_price}}</td>
                 <td>{{data.fertilizer_cost}}</td>
+                <td>{{data.fertilizer_total_cost}}</td>
                 <td><a class="btn btn-info btn-block bg-primary btn btn-info"
                        href="{% url 'fertilizer-update' data.id %}">Edit</a></td>
                 <td><a class="btn btn-info btn-block bg-danger btn btn-info"
@@ -50,6 +54,8 @@
             </tr>
             {% endfor %}
             <tr>
+                <td>#</td>
+                <td>#</td>
                 <td>#</td>
                 <td>#</td>
                 <td>#</td>
