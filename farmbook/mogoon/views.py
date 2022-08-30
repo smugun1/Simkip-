@@ -1,5 +1,8 @@
-from django.db.models import Sum, F
 from django.shortcuts import render, redirect
+
+
+from django.db.models import Sum, F
+
 from django.views.decorators.cache import never_cache
 
 from . import models
@@ -8,6 +11,7 @@ from .models import *
 
 
 # Create your views here.
+
 
 
 @never_cache
