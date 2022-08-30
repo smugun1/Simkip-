@@ -23,4 +23,6 @@ admin.site.site_index = "Mogoon Farm site"
 urlpatterns = [
     path('', include('mogoon.urls')),
     path('admin/', admin.site.urls),
+    path('members/', include('django.contrib.auth.urls')),
+    path('members/', include('members.urls')),
 ]
