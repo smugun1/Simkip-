@@ -6,7 +6,7 @@
 
 {% block body %}
 
-<hr width="99%" color="#ff00ff" size="16">
+
 <p class="text-center"><em> This is the reports home page </em></p>
 
 <div class="container fluid bg-light text-warning" style="width: 50rem;">
@@ -20,30 +20,16 @@
                 </div>
             </div>
             <div class="mb-3">
-                <label for="validationTextarea" class="form-label">Daily report Comment</label>
-                <textarea class="form-control" id="validationTextarea1" placeholder="Enter comments on farm activities"
+                <label for="validationTextarea" class="form-label">Visitors Name</label>
+                <textarea class="form-control" id="validationTextarea1" placeholder="Enter Name"
+                          required></textarea>
+                <label for="validationTextarea" class="form-label">Visitors Comments</label>
+                <textarea class="form-control" id="validationTextarea2" placeholder="Enter Visitors comments "
                           required></textarea>
                 <div class="invalid-feedback">
                     Please enter comments on farm activities.
                 </div>
             </div>
-
-            <div class="form-check mb-3">
-                <input type="checkbox" class="form-check-input" id="validationFormCheck1" required>
-                <label class="form-check-label" for="validationFormCheck1">Check this checkbox</label>
-                <div class="invalid-feedback">Example invalid feedback text</div>
-            </div>
-
-            <div class="form-check">
-                <input type="radio" class="form-check-input" id="validationFormCheck2" name="radio-stacked" required>
-                <label class="form-check-label" for="validationFormCheck2">Toggle this radio</label>
-            </div>
-            <div class="form-check mb-3">
-                <input type="radio" class="form-check-input" id="validationFormCheck3" name="radio-stacked" required>
-                <label class="form-check-label" for="validationFormCheck3">Or toggle this other radio</label>
-                <div class="invalid-feedback">More example invalid feedback text</div>
-            </div>
-
             <div class="mb-3">
                 <select class="form-select" required aria-label="select example">
                     <option value="">Open this select menu</option>

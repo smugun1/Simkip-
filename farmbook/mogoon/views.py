@@ -1,17 +1,13 @@
 from django.shortcuts import render, redirect
-
-
 from django.db.models import Sum, F
-
 from django.views.decorators.cache import never_cache
-
+from django.contrib.auth.decorators import login_required
 from . import models
 from .forms import TaskForm, UpdateTaskForm, UpdateFertilizerForm, UpdateKandojobsForm, UpdateMilkForm
 from .models import *
 
 
 # Create your views here.
-
 
 
 @never_cache
@@ -21,32 +17,6 @@ def Home(request):
         'form': TaskForm
     }
     return render(request, 'mogoon/home.html', context)
-
-
-@never_cache
-def Sign_Up_Table(request):
-    context = {
-        "name": {"Sign Up"},
-
-    }
-    return render(request, 'mogoon/sign_up.html', context)
-
-
-@never_cache
-def Sign_In_Table(request):
-    context = {
-        "name": {"Login"},
-
-    }
-    return render(request, 'mogoon/login.html', context)
-
-
-def Logout(request):
-    context = {
-        "name": {"Logout"},
-
-    }
-    return render(request, 'mogoon/logout.html', context)
 
 
 @never_cache

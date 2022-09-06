@@ -74,3 +74,7 @@ class Milk(models.Model):
 
     def __str__(self):
         return str(self.milk_today)
+
+
+class Profile:
+    pass

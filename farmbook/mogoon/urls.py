@@ -9,10 +9,6 @@ urlpatterns = [
 
     path('', Home, name='home'),
 
-    path('sign_up/', views.Sign_Up_Table, name='mogoon-sign_up_table'),
-    path('sign_in/', views.Sign_In_Table, name='mogoon-sign_in_table'),
-    path('logout/', views.Logout, name='mogoon-logout_table'),
-
     path('crop_table/', views.CropTable, name='mogoon-crop_table'),
     path('crop_table_update/', views.CropTableUpdate, name='mogoon-crop_table_update'),
     path('crop_create/', views.mogoonCropCreate, name='mogoon-crop_create'),

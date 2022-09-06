@@ -15,14 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 admin.site.site_header = "Developer: BuildGreen Encase"
 admin.site.site_title = "Farm Reports"
 admin.site.site_index = "Mogoon Farm site"
 
 urlpatterns = [
-    path('', include('mogoon.urls')),
-    path('admin/', admin.site.urls),
-    path('members/', include('django.contrib.auth.urls')),
-    path('members/', include('members.urls')),
-]
+                  path('', include('mogoon.urls')),
+                  path('admin/', admin.site.urls),
+                  path('members/', include('django.contrib.auth.urls')),
+                  path('members/', include('members.urls')),
+              ] + staticfiles_urlpatterns()

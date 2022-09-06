@@ -7,3 +7,5 @@ admin.site.register(Crop)
 admin.site.register(Kandojobs)
 admin.site.register(Fertilizer)
 admin.site.register(Milk)
+
+
