@@ -28,9 +28,8 @@
     <div class="card mb-3">
         <div class="row g-0 d-flex align-items-center">
 
-            <div class="col-lg-4 d-none d-lg-flex">
-                <img src="https://ktga.or.ke/wp-content/uploads/2018/05/Kenya-Tea-Export.jpg" alt=""
-                class="w-100 rounded-t-5 rounded-tr-lg-0 rounded-bl-lg-5"/>
+            <div class="col-md-4">
+                <img src="/static/images/slide 45.jpg" class="d-block w-100 h-80" alt="...">
             </div>
             <div class="col-lg-4">
                 <div class="card-body py-5 px-md-5">
@@ -47,6 +46,7 @@
                         {{fm.label_tag}} {{fm}} {{fm.errors|striptags}} <br><br>
                         {% endfor %}
                         <input type="submit" value="Submit">
+                        <a class="btn btn btn-info" href="{% url 'login' %}">Login</a>
                     </form>
                     {% if messages %}
                     {% for message in messages %}
@@ -71,9 +71,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 d-none d-lg-flex">
-                <img src="https://cdn.pixabay.com/photo/2020/04/10/12/31/cup-and-saucer-5025575_1280.png" alt=""
-                class="w-100 rounded-t-5 rounded-tr-lg-0 rounded-bl-lg-5"/>
+            <div class="col-md-4">
+                <img src="/static/images/slide 46.jpg" class="d-block w-100 h-80" alt="...">
             </div>
         </div>
     </div>

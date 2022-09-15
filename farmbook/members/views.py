@@ -26,20 +26,22 @@ def sign_up(request):
 def user_login(request):
     if not request.user.is_authenticated:
         if request.method == "POST":
-            fm = AuthenticationForm(request=request,data=request.POST)
+            fm = AuthenticationForm(request=request, data=request.POST)
             if fm.is_valid():
                 uname = fm.cleaned_data['username']
                 upass = fm.cleaned_data['password']
                 user = authenticate(username=uname, password=upass)
                 if user is not None:
-                    login(request,user)
-                    messages.success(request,'Logged in successfully!!!')
-                    return HttpResponseRedirect('/profile/')
+                    login(request, user)
+                    messages.success(request, 'Logged in successfully!!!')
+                    return render(request, 'authenticate/profile.html')
+                    # return HttpResponseRedirect('/profile/')
         else:
             fm = AuthenticationForm()
         return render(request, 'authenticate/userlogin.html', {'form': fm})
     else:
-        return HttpResponseRedirect('/profile/')
+        return render(request, 'authenticate/profile.html')
+        # return HttpResponseRedirect('/profile/')
 
 
 # Profile
@@ -48,11 +50,12 @@ def user_profile(request):
     if request.user.is_authenticated:
         return render(request, 'authenticate/profile.html', {'name': request.user})
     else:
-        return HttpResponseRedirect('/login/')
+        return render(request, 'authenticate/userlogin.html')
+        # return HttpResponseRedirect('/login/')
 
 
 # Logout
-
+@login_required
 def user_logout(request):
     logout(request)
 

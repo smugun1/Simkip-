@@ -3,7 +3,7 @@
     <div class="container-fluid">
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
-                {% if not user.is_authenticated %}
+                {% if user.is_authenticated %}
                     <li class="nav-item"><a class="nav-link active" href="{% url 'home' %}">Home</a></li>
                     <li class="nav-item"><a class="nav-link active" href="{% url 'mogoon-crop_table' %}">Crop Table</a></li>
                     <li class="nav-item"><a class="nav-link active" href="{% url 'mogoon-kandojobs_table' %}">Kandojobs Table</a></li>
@@ -17,7 +17,7 @@
     </div>
     <div>
         <ul class="navbar-nav">
-            {% if user.is_authenticated %}
+            {% if not user.is_authenticated %}
                  <li class="nav-item"><a class="nav-link active" href="{% url 'signup' %}">SignUp</a></li>
                 <li class="nav-item"><a class="nav-link active" href="{% url 'login' %}">Login</a></li>
 
