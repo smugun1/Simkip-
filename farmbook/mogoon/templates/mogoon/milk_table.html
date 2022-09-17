@@ -48,9 +48,9 @@
                 <td>{{data.milking_average}}</td>
                 <td>{{data.total_milk}}</td>
                 <td><a class="btn btn-info btn-block bg-primary btn btn-info"
-                       href="">Edit</a></td>
+                       href="{% url 'milk-update' data.id %}">Edit</a></td>
                 <td><a class="btn btn-info btn-block bg-danger btn btn-info"
-                       href="">Delete</a></td>
+                       href="{% url 'milk-delete' data.id %}">Delete</a></td>
                 {% endfor %}
             </tr>
 
