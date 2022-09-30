@@ -19,7 +19,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-*52#4!ewzu92%k16pl-(ij@kt0$*i%i6)*_6=dn$6(vq25&v$u'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -76,11 +76,11 @@ WSGI_APPLICATION = 'farmbook.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'First_Test',
-        'USER': 'postgres',
-        'PASSWORD': 'P*sng+2021',
-        'HOST': 'Localhost',
-        'PORT': '5432',
+        'NAME': os.environ.get('DB_USER'),
+        'USER': os.environ.get('DB_PASSWORD'),
+        'PASSWORD': os.environ.get('DB_PASSWORD'),
+        'HOST': os.environ.get('DB_HOST'),
+        'PORT': os.environ.get('DB_PORT'),
     }
 }
 
